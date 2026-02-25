@@ -340,8 +340,8 @@
     <nav>
         <div class="logo">HiveDrive</div>
         <div class="nav-actions">
-    <a href="#" class="login-btn">Log In</a>
-    <a href="#" class="join-btn">Join Now</a>
+    <a href="login.html" class="login-btn">Log In</a>
+    <a href="register.html" class="join-btn">Join Now</a>
     
     <div class="user-profile-container" id="profileToggle">
         <div class="profile-trigger">
@@ -405,9 +405,9 @@
                     <i class="fa fa-search" style="color: var(--text-muted);"></i>
                     <input type="text" placeholder="Search dashboard...">
                 </div>
-                <button class="btn-new-item">
-                    <i class="fa fa-plus"></i> New Document
-                </button>
+               <a href="uploadfile.html" class="btn-new-item">
+    <i class="fa fa-plus"></i> New Document
+</a>
             </div>
             
             <div class="stats-grid">
@@ -478,7 +478,6 @@
         profileDropdown.classList.toggle('show');
     });
 
-    // Close dropdown when clicking anywhere else on the screen
     window.addEventListener('click', () => {
         if (profileDropdown.classList.contains('show')) {
             profileDropdown.classList.remove('show');

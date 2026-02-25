@@ -355,12 +355,13 @@
         .modal-content {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            width: 400px;
+            width: 450px;
             padding: 24px;
             border-radius: 16px;
-            position: relative;
         }
         .modal-header { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+
+
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
         .form-group input, .form-group textarea {
@@ -475,13 +476,15 @@
                         <div class="meta-value">2 hours ago</div>
                     </div>
 
-                    <div class="action-list">
-                        <button class="btn-action"><i class="fa-solid fa-eye"></i> Open</button>
-                        <button class="btn-action"><i class="fa-solid fa-download"></i> Download</button>
-                        <button class="btn-action"><i class="fa-solid fa-pen"></i> Edit</button>
-                        <button class="btn-action"><i class="fa-solid fa-box-archive"></i> Archive</button>
-                        <button class="btn-action" style="color: var(--danger);"><i class="fa-solid fa-trash"></i> Move to Trash</button>
-                    </div>
+
+
+                   <div class="action-list">
+    <button class="btn-action"><i class="fa-solid fa-eye"></i> Open</button>
+    <button class="btn-action"><i class="fa-solid fa-download"></i> Download</button>
+    <button class="btn-action" onclick="openModal('editModal')"><i class="fa-solid fa-pen"></i> Edit</button>
+    <button class="btn-action" onclick="openModal('archiveModal')"><i class="fa-solid fa-box-archive"></i> Archive</button>
+    <button class="btn-action" style="color: var(--danger);" onclick="openModal('deleteModal')"><i class="fa-solid fa-trash"></i> Move to Trash</button>
+</div>
                 </div>
             </div>
 
@@ -537,20 +540,113 @@
             <div class="form-group">
                 <label>Message (Optional)</label>
                 <textarea rows="3" placeholder="Add a note..."></textarea>
-            </div>
+            </div> <button class="btn-upload">
+                    <i class="fa-solid fa-plus"></i> Upload New
+                </button>
             <div class="modal-footer">
                 <button class="btn-secondary" onclick="closeShareModal()">Cancel</button>
                 <button class="btn-primary" style="flex: 1;">Send Invitation</button>
             </div>
         </div>
     </div>
+    <div class="modal-overlay" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">Edit File Details</div>
+            <div class="form-group">
+                <label>Display Name</label>
+                <input type="text" id="editNameInput" value="Project_Proposal_2024.pdf">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="editDescInput" rows="4">This document contains the final project proposal for the 2024 infrastructure upgrade.</textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('editModal')">Cancel</button>
+                <button class="btn-primary" style="flex: 1;" onclick="saveDetails()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+<div class="modal-overlay" id="archiveModal">
+        <div class="modal-content">
+            <div class="modal-header">Archive File</div>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">
+                Are you sure you want to archive <strong>Project_Proposal_2024.pdf</strong>? 
+                Archived files are moved to a read-only state but can be restored later.
+            </p>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('archiveModal')">Cancel</button>
+                <button class="btn-primary" style="flex: 1; background-color: var(--accent-blue); color: white;">Confirm Archive</button>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        const modal = document.getElementById('shareModal');
-        function openShareModal() { modal.style.display = 'flex'; }
-        function closeShareModal() { modal.style.display = 'none'; }
-        // Close modal if clicking outside the content box
-        window.onclick = function(event) { if (event.target == modal) closeShareModal(); }
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header" style="color: var(--danger);">Move to Trash</div>
+            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5;">
+                Are you sure you want to move <strong>Project_Proposal_2024.pdf</strong> to the trash? 
+                Items in the trash will be permanently deleted after 30 days.
+            </p>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
+                <button class="btn-primary" style="flex: 1; background-color: var(--danger); color: white; border: none;">Move to Trash</button>
+            </div>
+        </div>
+    </div>
+   <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Optional: Function to simulate saving
+        function saveDetails() {
+            const newName = document.getElementById('editNameInput').value;
+            const newDesc = document.getElementById('editDescInput').value;
+            
+            document.getElementById('displayFileName').innerText = newName;
+            document.getElementById('displayFileDesc').innerText = newDesc;
+            
+            closeModal('editModal');
+        }
+
+        // Close modal if clicking outside content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        }
+        function openModal(modalId) {
+        document.getElementById(modalId).style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Existing save logic...
+    function saveDetails() {
+        const newName = document.getElementById('editNameInput').value;
+        const newDesc = document.getElementById('editDescInput').value;
+        
+        // Note: Ensure your HTML IDs 'displayFileName' and 'displayFileDesc' 
+        // exist on the h1 and description-body tags to see the live update.
+        if(document.getElementById('displayFileName')) 
+            document.getElementById('displayFileName').innerText = newName;
+        if(document.getElementById('displayFileDesc')) 
+            document.getElementById('displayFileDesc').innerText = newDesc;
+        
+        closeModal('editModal');
+    }
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            event.target.style.display = 'none';
+        }
+    }
     </script>
 
 </body>
