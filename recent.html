@@ -192,7 +192,22 @@
             position: relative;
             border-bottom: 1px solid var(--border-color);
         }
-
+ .btn-new-item {
+            background: var(--accent-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-new-item:hover { opacity: 0.9; }
         .file-thumb i { font-size: 36px; color: var(--text-muted); }
 
         .badge-new {
@@ -418,7 +433,7 @@
                 <!-- <button class="btn-upload">
                     <i class="fa-solid fa-plus"></i> Upload New
                 </button> -->
-                <a href="uploadfile.html" class="btn-upload">
+                 <a href="uploadfile.html" class="btn-new-item">
     <i class="fa fa-plus"></i> New Document
 </a>
             </div>

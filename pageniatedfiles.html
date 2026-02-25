@@ -124,14 +124,17 @@
             color: white;
             padding: 10px 20px;
             border-radius: 10px;
+            text-decoration: none;
             font-weight: 600;
             font-size: 14px;
             border: none;
             cursor: pointer;
+            transition: 0.2s;
             display: flex;
             align-items: center;
             gap: 10px;
         }
+        .btn-new-item:hover { opacity: 0.9; }
 
         /* --- Updated Grid Layout (3 items per row) --- */
         .file-grid {
@@ -415,7 +418,7 @@
                     <i class="fa fa-search" style="color: var(--text-muted);"></i>
                     <input type="text" placeholder="Search Your Files">
                 </div>
-              <a href="uploadfile.html" class="btn-new-item">
+             <a href="uploadfile.html" class="btn-new-item">
     <i class="fa fa-plus"></i> New Document
 </a>
             </div>
