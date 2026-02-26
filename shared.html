@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Shared Files</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --bg-card: #0a0a0a;
+            --border-color: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #808080;
+            --accent-white: #e3e3e3;
+            --accent-blue: #3b82f6;
+            --danger: #ff4444;
+            --success: #00c851;
+            --modal-bg: rgba(0, 0, 0, 0.8);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Nav --- */
+        nav { height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--border-color); }
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .login-btn { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .join-btn { background: white; color: black; padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        /* --- Profile Dropdown --- */
+        .user-profile-container { position: relative; display: flex; align-items: center; padding: 4px 8px; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent; }
+        .user-profile-container:hover { background: #111; }
+        .profile-trigger { display: flex; align-items: center; gap: 10px; }
+        .profile-circle { width: 32px; height: 32px; background: var(--accent-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .profile-meta { display: flex; flex-direction: column; text-align: left; }
+        .profile-name { font-size: 13px; font-weight: 500; color: var(--text-main); }
+        .profile-role { font-size: 10px; color: var(--text-muted); }
+        .dropdown-icon { font-size: 10px; color: var(--text-muted); margin-left: 4px; }
+        .profile-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: 180px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px; display: none; z-index: 100; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .profile-dropdown.show { display: block; }
+        .profile-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; color: var(--text-muted); text-decoration: none; font-size: 13px; border-radius: 6px; transition: 0.2s; }
+        .profile-dropdown a:hover { background: #1a1a1a; color: white; }
+        .profile-dropdown hr { border: 0; border-top: 1px solid var(--border-color); margin: 8px 0; }
+        .profile-dropdown a.logout-link { color: var(--danger); }
+
+        .app-container { display: grid; grid-template-columns: 260px 1fr 320px; flex-grow: 1; overflow: hidden; }
+        
+        /* --- Sidebar --- */
+        .sidebar { padding: 24px 16px; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        .section-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin: 24px 0 12px 12px; }
+        .nav-item { display: flex; align-items: center; padding: 10px 12px; border-radius: 8px; color: var(--text-muted); text-decoration: none; font-size: 14px; transition: 0.2s; }
+        .nav-item:hover { background: #111; color: white; }
+        .nav-item.active { color: white; background: #111; }
+        .nav-item i { width: 20px; margin-right: 12px; font-size: 16px; }
+
+        .user-item { display: flex; align-items: center; padding: 8px 12px; gap: 12px; cursor: pointer; min-width: 0; }
+        .user-avatar { width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 50%; background: var(--border-color); color: var(--text-main); }
+        .user-info { flex: 1; min-width: 0; overflow: hidden; }
+        .username { font-size: 13px; font-weight: 500; color: var(--text-main); display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .view-all { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-top: 1px solid var(--border-color); }
+
+        /* --- File Explorer & Table --- */
+        .file-explorer-main { overflow-y: auto; padding: 24px 40px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .page-title { font-size: 20px; font-weight: 600; }
+        
+        .file-table { width: 100%; border-collapse: collapse; }
+        .file-table thead th { text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
+        .file-row:hover { background: #050505; }
+        .file-cell { padding: 16px; font-size: 14px; border-bottom: 1px solid #141414; }
+        
+        /* --- Text Action Buttons --- */
+        .action-btns { display: flex; gap: 16px; justify-content: flex-end; align-items: center; }
+        .btn-text-action { background: none; border: none; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.2s; padding: 0; }
+        .btn-manage-txt { color: var(--accent-blue); }
+        .btn-manage-txt:hover { text-decoration: underline; }
+        
+        .status-badge { font-size: 11px; padding: 4px 8px; border-radius: 4px; background: rgba(0, 200, 81, 0.1); color: var(--success); }
+
+        /* --- Modals --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px); }
+        .modal { background: var(--bg-card); border: 1px solid var(--border-color); padding: 30px; border-radius: 16px; width: 100%; max-width: 400px; text-align: center; }
+        .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+        .modal-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
+        .modal-actions { display: flex; gap: 12px; }
+        .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-cancel { background: #222; color: white; }
+        .btn-revoke { background: var(--danger); color: white; }
+
+        /* --- Right Panel --- */
+        .right-panel { padding: 24px 20px; border-left: 1px solid var(--border-color); }
+        .card { border: 1px solid var(--border-color); padding: 16px; border-radius: 12px; background: var(--bg-card); }
+        .card-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <div id="manageLinkModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-title">Manage Share Link</div>
+            <p class="modal-desc">Anyone with the link can currently view this file. You can revoke access immediately.</p>
+            <div class="modal-actions">
+                <button class="btn-modal btn-cancel" onclick="closeModal('manageLinkModal')">Keep Active</button>
+                <button class="btn-modal btn-revoke">Revoke Access</button>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="logo">HiveDrive</div>
+        <div class="nav-actions">
+            <a href="login.html" class="login-btn">Log In</a>
+            <a href="register.html" class="join-btn">Join Now</a>
+            <div class="user-profile-container" id="profileToggle">
+                <div class="profile-trigger">
+                    <div class="profile-circle">JD</div>
+                    <div class="profile-meta">
+                        <span class="profile-name">John Doe</span>
+                        <span class="profile-role">Project Manager</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <a href="#"><i class="fa-solid fa-user"></i> My Profile</a>
+                    <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+                    <hr>
+                    <a href="#" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="section-label">Main Feed</div>
+            <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="pageniatedfiles.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> My Files</a>
+            <a href="recent.html" class="nav-item"><i class="fa-solid fa-clock"></i> Recent</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-star"></i> Starred</a>
+            <a href="#" class="nav-item active"><i class="fa-solid fa-share-nodes"></i> Shared Files</a>          
+            
+            <div class="section-label">Organize</div>
+            <a href="collections.html" class="nav-item"><i class="fa-solid fa-folder"></i> Collections</a>
+            <a href="archive.html" class="nav-item"><i class="fa-solid fa-box-archive"></i> Archive</a>
+            <a href="trash.html" class="nav-item"><i class="fa-solid fa-trash"></i> Trash</a>
+            
+            <div class="section-label">Recently Shared With</div>          
+            <div class="user-item">
+                <div class="user-avatar">A</div>
+                <div class="user-info"><span class="username">abhiram@innovaturelabs.com</span></div>
+            </div>
+            <div class="user-item">
+                <div class="user-avatar">D</div>
+                <div class="user-info"><span class="username">demo@innovaturelabs.com</span></div>
+            </div>
+        </aside>
+
+        <main class="file-explorer-main">
+            <div class="page-header">
+                <div class="page-title">Shared Files</div>
+                <div style="color: var(--text-muted); font-size: 14px;">2 items actively shared</div>
+            </div>
+
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Shared With</th>
+                        <th>View Status</th>
+                        <th style="text-align: right;">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="file-row">
+                        <td class="file-cell">
+                            <i class="fa-solid fa-file-pdf" style="margin-right: 10px; color: #ff4444;"></i>
+                            Final_Pitch_Deck.pdf
+                        </td>
+                        <td class="file-cell" style="color: var(--text-muted);">Public Link</td>
+                        <td class="file-cell"><span class="status-badge">42 Views</span></td>
+                        <td class="file-cell">
+                            <div class="action-btns">
+                                <button class="btn-text-action btn-manage-txt" onclick="openModal('manageLinkModal')">Manage Link</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="file-row">
+                        <td class="file-cell">
+                            <i class="fa-solid fa-file-excel" style="margin-right: 10px; color: #00c851;"></i>
+                            Budget_Sheet_Q1.xlsx
+                        </td>
+                        <td class="file-cell" style="color: var(--text-muted);">abhiram@innovaturelabs.com</td>
+                        <td class="file-cell"><span class="status-badge">12 Views</span></td>
+                        <td class="file-cell">
+                            <div class="action-btns">
+                                <button class="btn-text-action btn-manage-txt" onclick="openModal('manageLinkModal')">Manage Link</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="viewallshares.html" class="view-all" style="padding: 15px 16px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit;">
+    <span>View all shared files</span>
+    <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+</a>
+            <div class="page-header" style="margin-top: 50px;">
+    <div class="page-title">Recently Shared With</div>
+</div>
+
+<table class="file-table">
+    <thead>
+        <tr>
+            <th>Email ID</th>
+            <th>File Name</th>
+            <th>Status</th>
+            <th style="text-align: right;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="file-row">
+            <td class="file-cell" style="color: var(--accent-blue);">abhiram@innovaturelabs.com</td>
+            <td class="file-cell">Project_Spec_v2.docx</td>
+            <td class="file-cell"><span class="status-badge" style="background: rgba(59, 130, 246, 0.1); color: var(--accent-blue);">Active</span></td>
+            <td class="file-cell">
+                <div class="action-btns">
+                    <button class="btn-text-action btn-manage-txt" onclick="openModal('manageLinkModal')">Manage</button>
+                </div>
+            </td>
+        </tr>
+        <tr class="file-row">
+            <td class="file-cell" style="color: var(--accent-blue);">demo@innovaturelabs.com</td>
+            <td class="file-cell">Branding_Guidelines.zip</td>
+            <td class="file-cell"><span class="status-badge" style="background: rgba(255, 68, 68, 0.1); color: var(--danger);">Expired</span></td>
+            <td class="file-cell">
+                <div class="action-btns">
+                    <button class="btn-text-action btn-manage-txt" onclick="openModal('manageLinkModal')">Manage</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a href="viewallshares.html" class="view-all" style="padding: 15px 16px; display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: inherit;">
+    <span>View all shared files</span>
+    <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+</a>
+        </main>
+
+        <aside class="right-panel">
+            <div class="card" style="border-color: var(--accent-blue);">
+                <div class="card-title" style="color: var(--accent-blue);">Sharing Overview</div>
+                <p style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
+                    These are files you have shared with others. You can track view counts or revoke access at any time to keep your data secure.
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('show');
+        });
+
+        window.onclick = function(event) {
+            if (event.target.className === 'modal-overlay') { event.target.style.display = 'none'; }
+            if (!event.target.closest('#profileToggle')) {
+                profileDropdown.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>

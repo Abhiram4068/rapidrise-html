@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HiveDrive Drive | Profile</title>
+    <title>HiveDrive | Account Settings</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -29,7 +29,19 @@
             overflow: hidden;
         }
 
-        /* --- Top Navbar --- */
+        /* --- Hide Scrollbars --- */
+ .dashboard-main::-webkit-scrollbar,
+        .sidebar::-webkit-scrollbar,
+        .right-panel::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .dashboard-main, .sidebar, .right-panel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* --- Top Navbar (Same as Index) --- */
         nav {
             height: 60px;
             display: flex;
@@ -52,12 +64,13 @@
             overflow: hidden;
         }
 
-        /* --- Left Sidebar --- */
+        /* --- Left Sidebar (Same as Index) --- */
         .sidebar {
             padding: 24px 16px;
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .section-label {
@@ -81,7 +94,7 @@
 
         .nav-item:hover { background: #111; color: white; }
         .nav-item i { width: 20px; margin-right: 12px; font-size: 16px; }
-        .nav-item.active { color: white; }
+        .nav-item.active { color: white; background: #111; }
 
         .user-item { display: flex; align-items: center; padding: 8px 12px; gap: 12px; cursor: pointer; min-width: 0; }
         .user-avatar { width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 50%; background: var(--border-color); color: var(--text-main); }
@@ -89,18 +102,18 @@
         .username { font-size: 13px; font-weight: 500; color: var(--text-main); display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .view-all { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-top: 1px solid var(--border-color); }
 
-        /* --- Center Dashboard (Main Content) --- */
-        .dashboard-main { 
-            overflow-y: auto; 
-            padding: 40px; 
-background: #060505;
-            margin: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
+        /* --- Center Settings Section --- */
+        .dashboard-main { overflow-y: auto; padding: 40px; }
+        
+        .settings-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .header-action-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
 
-        /* --- Profile Page Specific Styles --- */
         .profile-header-card {
             display: flex;
             align-items: center;
@@ -109,42 +122,69 @@ background: #060505;
             padding-bottom: 40px;
             border-bottom: 1px solid var(--border-color);
         }
+
         .profile-avatar-large {
-            width: 100px;
-            height: 100px;
+            width: 100px; height: 100px;
             background: var(--accent-blue);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px; font-weight: 700; color: white;
+            position: relative;
         }
-        .profile-info-main h2 { margin: 0 0 5px 0; font-size: 28px; }
-        .profile-info-main p { margin: 0; color: var(--text-muted); font-size: 14px; }
-        .edit-profile-link {
-            margin-left: auto;
-            background: white;
-            color: black;
-            padding: 10px 24px;
-            border-radius: 20px;
-            text-decoration: none;
+
+        .avatar-edit-overlay {
+            position: absolute; bottom: 0; right: 0;
+            background: white; color: black;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; cursor: pointer;
+        }
+
+        .edit-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        
+        .styled-input {
+            background: #0a0a0a;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: white;
             font-size: 14px;
-            font-weight: 600;
+            outline: none;
             transition: 0.2s;
         }
-        .edit-profile-link:hover { opacity: 0.9; }
-        
-        .profile-details-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-        .detail-item { 
-            background: transparent; /* Removed individual card background */
-            padding: 0; 
-        }
-        .detail-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 10px; }
-        .detail-value { font-size: 16px; font-weight: 500; color: var(--text-main); }
+        .styled-input:focus { border-color: var(--accent-blue); }
 
-        /* --- User Profile & Dropdown --- */
+        .section-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .danger-zone {
+            padding: 20px;
+            border: 1px solid #2a1111;
+            background: #110505;
+            border-radius: 12px;
+        }
+
+        .form-actions {
+            margin-top: 40px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .save-btn { background: white; color: black; padding: 10px 24px; border-radius: 20px; border: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .cancel-btn { background: transparent; color: var(--text-muted); padding: 10px 24px; border-radius: 20px; border: 1px solid var(--border-color); text-decoration: none; font-weight: 600; font-size: 14px; text-align: center; }
+        .disable-btn { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 8px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        .disable-btn:hover { background: var(--danger); color: white; }
+
+        /* --- User Profile Dropdown (Same as Index) --- */
         .user-profile-container { position: relative; display: flex; align-items: center; padding: 4px 8px; border-radius: 8px; cursor: pointer; transition: background 0.2s; border: 1px solid transparent; }
         .user-profile-container:hover { background: #111; }
         .profile-trigger { display: flex; align-items: center; gap: 10px; }
@@ -160,15 +200,15 @@ background: #060505;
         .profile-dropdown hr { border: 0; border-top: 1px solid var(--border-color); margin: 8px 0; }
         .profile-dropdown a.logout-link { color: var(--danger); }
 
-        /* --- Right Panel --- */
-        .right-panel { padding: 24px 20px; border-left: 1px solid var(--border-color); }
+        /* --- Right Panel (Same as Index) --- */
+        .right-panel { padding: 24px 20px; border-left: 1px solid var(--border-color); overflow-y: auto; }
         .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
         .card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
         .card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+        
         .btn-link-primary { display: block; width: auto; padding: 10px; background: var(--accent-white); color: black; border-radius: 20px; font-weight: 600; cursor: pointer; margin-bottom: 10px; text-decoration: none; text-align: center; font-size: 14px; }
         .btn-link-secondary { display: block; width: auto; padding: 10px; background: transparent; color: white; border: 1px solid var(--border-color); border-radius: 20px; font-weight: 600; cursor: pointer; text-decoration: none; text-align: center; font-size: 14px; }
-        .btn-link-primary:hover { opacity: 0.9; }
-        .btn-link-secondary:hover { background: #111; }
+
         .storage-warning { display: flex; align-items: center; gap: 10px; color: var(--danger); font-size: 13px; font-weight: 600; }
         .progress-bar { height: 4px; background: #222; border-radius: 2px; margin: 12px 0; }
         .progress-fill { width: 93%; height: 100%; background: var(--danger); }
@@ -193,7 +233,7 @@ background: #060505;
                 </div>
                 
                 <div class="profile-dropdown" id="profileDropdown">
-                    <a href="userprofile.html"><i class="fa-solid fa-user"></i> My Profile</a>
+                    <a href="userprofile.html"><i class="fa-solid fa-user"></i> Account </a>
                     <hr>
                     <a href="#" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                 </div>
@@ -215,21 +255,11 @@ background: #060505;
             <div class="section-label">Recently Shared With</div>          
             <div class="user-item">
                 <div class="user-avatar">1</div>
-                <div class="user-info">
-                    <span class="username">abhiram@innovaturelabs.commmmm</span>
-                </div>
+                <div class="user-info"><span class="username">abhiram@innovaturelabs.com</span></div>
             </div>
             <div class="user-item">
                 <div class="user-avatar">2</div>
-                <div class="user-info">
-                    <span class="username">demo@innovaturelabs.com</span>
-                </div>
-            </div>
-            <div class="user-item">
-                <div class="user-avatar">3</div>
-                <div class="user-info">
-                    <span class="username">you@innovaturelabs.com</span>
-                </div>
+                <div class="user-info"><span class="username">demo@innovaturelabs.com</span></div>
             </div>
             <div class="view-all">
                 <span>View All shares</span>
@@ -238,55 +268,69 @@ background: #060505;
         </aside>
 
         <main class="dashboard-main">
-            <div class="header-action-row">
-                <div style="font-size: 20px; font-weight: 600;">Account Profile</div>
-            </div>
-
             <div class="profile-header-card">
-                <div class="profile-avatar-large">JD</div>
-                <div class="profile-info-main">
-                    <h2>John Doe</h2>
-                    <p>Project Manager • john.doe@innovaturelabs.com</p>
+                <div class="profile-avatar-large">JD
+                    <div class="avatar-edit-overlay"><i class="fa-solid fa-camera"></i></div>
                 </div>
-                <a href="settings.html" class="edit-profile-link">
-                    Edit Profile
-                </a>
+                <div class="profile-info-main">
+                    <h2 style="font-size: 24px; margin:0;">Account Settings</h2>
+                    <p>Manage your profile details and security preferences.</p>
+                </div>
             </div>
 
-            <div class="profile-details-grid">
-                <div class="detail-item">
-                    <div class="detail-label">First Name</div>
-                    <div class="detail-value">John</div>
+            <form>
+                <div class="section-title"><i class="fa-solid fa-address-card"></i> Personal Information</div>
+                <div class="edit-form-grid">
+                    <div class="input-group">
+                        <label class="input-label">First Name</label>
+                        <input type="text" class="styled-input" value="John">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Last Name</label>
+                        <input type="text" class="styled-input" value="Doe">
+                    </div>
+                    <div class="input-group" style="grid-column: span 2;">
+                        <label class="input-label">Email Address</label>
+                        <input type="email" class="styled-input" value="john.doe@innovaturelabs.com">
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Last Name</div>
-                    <div class="detail-value">Doe</div>
+
+                <div class="section-title"><i class="fa-solid fa-lock"></i> Authentication</div>
+                <div class="edit-form-grid">
+                    <div class="input-group" style="grid-column: span 2;">
+                        <label class="input-label">Old Password</label>
+                        <input type="password" class="styled-input" placeholder="Enter current password">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">New Password</label>
+                        <input type="password" class="styled-input" placeholder="New password">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Confirm New Password</label>
+                        <input type="password" class="styled-input" placeholder="Confirm new password">
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Role / Occupation</div>
-                    <div class="detail-value">Project Manager</div>
+
+                <div class="section-title" style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> Danger Zone</div>
+                <div class="danger-zone">
+                    <div style="font-size: 14px; font-weight: 500;">Disable Account</div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin: 5px 0 15px 0;">Deactivating your account will restrict access to your files. This action can be reversed by an administrator.</p>
+                    <button type="button" class="disable-btn">Disable My Account</button>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Total Files Managed</div>
-                    <div class="detail-value">1,248 Files</div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <a href="userprofile.html" class="cancel-btn">Cancel</a>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Date Joined</div>
-                    <div class="detail-value">January 15, 2024</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Account Status</div>
-                    <div class="detail-value" style="color: #00c851;">Active</div>
-                </div>
-            </div>
+            </form>
         </main>
 
         <aside class="right-panel">
             <div class="card">
-                <div class="card-title">Home</div>
-                <p class="card-desc">Your personal HiveDrive frontpage. Come here to check in with your most important documents and shared folders.</p>
-                <a href="uploadfile.html" class="btn-link-primary">Upload File</a>
-                <a href="collections.html" class="btn-link-secondary">View your Collections</a>
+                <div class="card-title">Settings Help</div>
+                <p class="card-desc">Need to update your storage plan or manage team permissions? Visit our documentation or contact support.</p>
+                <a href="#" class="btn-link-primary">Contact Support</a>
+                <a href="#" class="btn-link-secondary">Privacy Policy</a>
             </div>
 
             <div class="card">

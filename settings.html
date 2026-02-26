@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Account Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --bg-card: #0a0a0a;
+            --border-color: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #808080;
+            --accent-white: #e3e3e3;
+            --accent-blue: #3b82f6;
+            --danger: #ff4444;
+            --success: #00c851;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Hide Scrollbars --- */
+        .dashboard-main::-webkit-scrollbar,
+        .sidebar::-webkit-scrollbar,
+        .right-panel::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .dashboard-main, .sidebar, .right-panel {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        nav {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .join-btn { background: white; color: black; padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 260px 1fr 320px;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            padding: 24px 16px;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin: 24px 0 12px 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover { background: #111; color: white; }
+        .nav-item i { width: 20px; margin-right: 12px; font-size: 16px; }
+
+        .dashboard-main { 
+            overflow-y: auto; 
+            padding: 40px; 
+            background: #060505;
+            margin: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-header-card {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-avatar-large {
+            width: 100px; height: 100px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px; font-weight: 700; color: white;
+            position: relative;
+        }
+
+        .avatar-edit-overlay {
+            position: absolute; bottom: 0; right: 0;
+            background: white; color: black;
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; cursor: pointer;
+        }
+        
+        .edit-form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px; }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .input-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        
+        .styled-input {
+            background: #111;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.2s;
+        }
+        .styled-input:focus { outline: none; border-color: var(--accent-blue); }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .danger-zone {
+            margin-top: 20px;
+            padding: 24px;
+            border: 1px solid #2a1111;
+            background: #110505;
+            border-radius: 12px;
+        }
+
+        .form-actions {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 15px;
+        }
+
+        .save-btn { background: white; color: black; padding: 12px 30px; border-radius: 20px; border: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .cancel-btn { background: transparent; color: var(--text-muted); padding: 12px 30px; border-radius: 20px; border: 1px solid var(--border-color); text-decoration: none; font-weight: 600; font-size: 14px; text-align: center; }
+        .disable-btn { background: transparent; color: var(--danger); border: 1px solid var(--danger); padding: 8px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 10px;}
+        .disable-btn:hover { background: var(--danger); color: white; }
+
+        /* --- Right Panel --- */
+        .right-panel { padding: 24px 20px; border-left: 1px solid var(--border-color); overflow-y: auto; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+        .btn-link-primary { display: block; width: auto; padding: 10px; background: var(--accent-white); color: black; border-radius: 20px; font-weight: 600; cursor: pointer; text-align: center; font-size: 14px; text-decoration: none;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">HiveDrive</div>
+        <div class="nav-actions">
+            <a href="register.html" class="join-btn">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="section-label">Main Feed</div>
+            <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="pageniatedfiles.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> My Files</a>
+            <div class="section-label">Account</div>
+            <a href="userprofile.html" class="nav-item"><i class="fa-solid fa-user"></i> My Profile</a>
+            <a href="#" class="nav-item active"><i class="fa-solid fa-gear"></i> Settings</a>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="profile-header-card">
+                <div class="profile-avatar-large">JD
+                    <div class="avatar-edit-overlay"><i class="fa-solid fa-camera"></i></div>
+                </div>
+                <div class="profile-info-main">
+                    <h2 style="font-size: 24px; margin:0;">Account Settings</h2>
+                    <p>Manage your profile details and security preferences.</p>
+                </div>
+            </div>
+
+            <form>
+                <div class="section-title"><i class="fa-solid fa-address-card"></i> Personal Information</div>
+                <div class="edit-form-grid">
+                    <div class="input-group">
+                        <label class="input-label">First Name</label>
+                        <input type="text" class="styled-input" value="John">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Last Name</label>
+                        <input type="text" class="styled-input" value="Doe">
+                    </div>
+                    <div class="input-group" style="grid-column: span 2;">
+                        <label class="input-label">Email Address</label>
+                        <input type="email" class="styled-input" value="john.doe@innovaturelabs.com">
+                    </div>
+                </div>
+
+                <div class="section-title"><i class="fa-solid fa-lock"></i> Authentication</div>
+                <div class="edit-form-grid">
+                    <div class="input-group" style="grid-column: span 2;">
+                        <label class="input-label">Old Password</label>
+                        <input type="password" class="styled-input" placeholder="Enter current password">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">New Password</label>
+                        <input type="password" class="styled-input" placeholder="New password">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Confirm New Password</label>
+                        <input type="password" class="styled-input" placeholder="Confirm new password">
+                    </div>
+                </div>
+
+                <div class="section-title" style="color: var(--danger);"><i class="fa-solid fa-circle-exclamation"></i> Danger Zone</div>
+                <div class="danger-zone">
+                    <div style="font-size: 14px; font-weight: 500;">Disable Account</div>
+                    <p style="font-size: 12px; color: var(--text-muted); margin: 5px 0 15px 0;">Deactivating your account will restrict access to your files. This action can be reversed by an administrator.</p>
+                    <button type="button" class="disable-btn">Disable My Account</button>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <a href="userprofile.html" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </main>
+
+        <aside class="right-panel">
+            <div class="card">
+                <div class="card-title">Security Tip</div>
+                <p class="card-desc">Ensure your new password is at least 8 characters long and includes a mix of letters, numbers, and symbols.</p>
+                <a href="#" class="btn-link-primary">Privacy Policy</a>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

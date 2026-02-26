@@ -87,7 +87,8 @@
         .user-avatar { width: 28px; height: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 50%; background: var(--border-color); color: var(--text-main); }
         .user-info { flex: 1; min-width: 0; overflow: hidden; }
         .username { font-size: 13px; font-weight: 500; color: var(--text-main); display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .view-all { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-top: 1px solid var(--border-color); }
+        .view-all { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-top: 1px solid var(--border-color); text-decoration: none;   /* removes underline */
+    color: inherit;   }
 
         /* --- Center Dashboard --- */
         .dashboard-main { overflow-y: auto; padding: 24px 40px; }
@@ -168,7 +169,7 @@
                 </div>
                 
                 <div class="profile-dropdown" id="profileDropdown">
-                    <a href="userprofile.html"><i class="fa-solid fa-user"></i> My Profile</a>
+                    <a href="userprofile.html"><i class="fa-solid fa-user"></i> Account </a>
                   
                     <hr>
                     <a href="#" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
@@ -182,11 +183,13 @@
             <div class="section-label">Main Feed</div>
             <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i> Home</a>
             <a href="pageniatedfiles.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> My Files</a>
+                        <a href="shared.html" class="nav-item"><i class="fa-solid fa-share-nodes"></i> Shares</a> 
             <a href="recent.html" class="nav-item"><i class="fa-solid fa-clock"></i> Recent</a>
             <a href="#" class="nav-item"><i class="fa-solid fa-star"></i> Starred</a>
-            <a href="#" class="nav-item"><i class="fa-solid fa-share-nodes"></i> Shared Files</a>          
+         
             <div class="section-label">Organize</div>
             <a href="collections.html" class="nav-item"><i class="fa-solid fa-folder"></i> Collections</a>
+                     <a href="archives.html" class="nav-item"><i class="fa-solid fa-folder"></i> Archives</a>
             <a href="trash.html" class="nav-item"><i class="fa-solid fa-trash"></i> Trash</a>
             <div class="section-label">Recently Shared With</div>          
             <div class="user-item">
@@ -207,10 +210,10 @@
                     <span class="username">you@innovaturelabs.com</span>
                 </div>
             </div>
-            <div class="view-all">
-                <span>View All shares</span>
-                <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
-            </div>
+            <a href="viewallshares.html" class="view-all">
+    <span>View All Shares</span>
+    <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+</a>
         </aside>
 
         <main class="dashboard-main">

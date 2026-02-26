@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Shared Files</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --bg-card: #0a0a0a;
+            --border-color: #1a1a1a;
+            --text-main: #ffffff;
+            --text-muted: #808080;
+            --accent-white: #e3e3e3;
+            --accent-blue: #3b82f6;
+            --danger: #ff4444;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Top Navbar --- */
+        nav {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .login-btn { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+        .join-btn { background: white; color: black; padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+        /* --- Main Layout --- */
+        .app-container {
+            display: grid;
+            grid-template-columns: 260px 1fr 320px;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        /* --- Left Sidebar --- */
+        .sidebar {
+            padding: 24px 16px;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin: 24px 0 12px 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 450px;
+            background: #0a0a0a;
+            border: 1px solid var(--border-color);
+            padding: 10px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            color: white;
+            margin-left: 12px;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .btn-new-item {
+            background: var(--accent-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-new-item:hover { opacity: 0.9; }
+        .nav-item:hover { background: #111; color: white; }
+        .nav-item i { width: 20px; margin-right: 12px; font-size: 16px; }
+        .nav-item.active { color: white; background: #111; }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            gap: 12px;
+            cursor: pointer;
+            min-width: 0;
+        }
+
+        .user-avatar {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            border-radius: 50%;
+            background: var(--border-color);
+            color: var(--text-main);
+        }
+
+        .user-info { flex: 1; min-width: 0; overflow: hidden; }
+
+        .username {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-main);
+            display: block;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .view-all { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-top: 1px solid var(--border-color); }
+
+        /* --- Center File Explorer --- */
+        .file-explorer-main {
+            overflow-y: auto;
+            padding: 24px 40px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title { font-size: 20px; font-weight: 600; }
+
+        .file-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .file-table thead th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .file-row { transition: background 0.2s; cursor: pointer; }
+        .file-row:hover { background: #050505; }
+
+        .file-cell {
+            padding: 16px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .file-row:not(:last-child) .file-cell {
+            border-bottom: 1px solid #141414;
+        }
+
+        .name-col { display: flex; align-items: center; gap: 12px; }
+        .name-col i { color: var(--text-muted); font-size: 18px; }
+        .shared-col, .status-col { color: var(--text-muted); }
+        
+        .manage-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .manage-link:hover { text-decoration: underline; }
+
+        .status-badge {
+            background: #111;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--accent-white);
+        }
+
+        /* --- Right Panel --- */
+        .right-panel { padding: 24px 20px; border-left: 1px solid var(--border-color); }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">HiveDrive</div>
+        <div class="nav-actions">
+            <a href="#" class="login-btn">Log In</a>
+            <a href="#" class="join-btn">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="section-label">Main Feed</div>
+            <a href="#" class="nav-item"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="pageniatedfiles.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> My Files</a>
+            <a href="recent.html" class="nav-item"><i class="fa-solid fa-clock"></i> Recent</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-star"></i> Starred</a>
+            <a href="#" class="nav-item active"><i class="fa-solid fa-share-nodes"></i> Shared Files</a>          
+            <div class="section-label">Organize</div>
+            <a href="collections.html" class="nav-item"><i class="fa-solid fa-folder"></i> Collections</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-trash"></i> Trash</a>
+            <div class="section-label">Recently Shared With</div>          
+            <div class="user-item">
+                <div class="user-avatar">1</div>
+                <div class="user-info">
+                    <span class="username">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="user-item">
+                <div class="user-avatar">2</div>
+                <div class="user-info">
+                    <span class="username">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="view-all">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i>
+            </div>
+        </aside>
+
+        <main class="file-explorer-main">
+            <div class="header-action-row">
+                <div class="search-container">
+                    <i class="fa fa-search" style="color: var(--text-muted);"></i>
+                    <input type="text" placeholder="Search Shared Files">
+                </div>
+                <button class="btn-new-item">
+                    <i class="fa fa-share-nodes"></i> Share Document
+                </button>
+            </div>
+            <div class="page-header">
+                <div class="page-title">Shared Files</div>
+                <div style="color: var(--text-muted); font-size: 14px;">42 items shared</div>
+            </div>
+
+            <table class="file-table">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Shared With</th>
+                        <th>View Status</th>
+                        <th style="text-align: right;">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="file-row">
+                        <td class="file-cell name-col">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>Project_Proposal_2024.pdf</span>
+                        </td>
+                        <td class="file-cell shared-col">abhiram@innovaturelabs.com</td>
+                        <td class="file-cell status-col">
+                            <span class="status-badge">Opened 2m ago</span>
+                        </td>
+                        <td class="file-cell" style="text-align: right;">
+                            <a href="#" class="manage-link">Edit Access</a>
+                        </td>
+                    </tr>
+                    <tr class="file-row">
+                        <td class="file-cell name-col">
+                            <i class="fa-solid fa-file-word"></i>
+                            <span>Q4_Financial_Report.docx</span>
+                        </td>
+                        <td class="file-cell shared-col">demo@innovaturelabs.com</td>
+                        <td class="file-cell status-col">
+                            <span class="status-badge">Never Opened</span>
+                        </td>
+                        <td class="file-cell" style="text-align: right;">
+                            <a href="#" class="manage-link">Edit Access</a>
+                        </td>
+                    </tr>
+                    <tr class="file-row">
+                        <td class="file-cell name-col">
+                            <i class="fa-solid fa-image"></i>
+                            <span>branding_assets_final.zip</span>
+                        </td>
+                        <td class="file-cell shared-col">Public Link</td>
+                        <td class="file-cell status-col">
+                            <span class="status-badge">124 Views</span>
+                        </td>
+                        <td class="file-cell" style="text-align: right;">
+                            <a href="#" class="manage-link">Revoke</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <aside class="right-panel">
+            <div class="card">
+                <div class="card-title">Shared Insights</div>
+                <p class="card-desc">Track how others are interacting with your documents. You can revoke access or change permissions at any time.</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Quick Security</div>
+                <p class="card-desc">Ensure your sensitive documents are only visible to the right people.</p>
+                <button style="width: 100%; padding: 10px; background: #111; color: white; border: 1px solid var(--border-color); border-radius: 20px; cursor: pointer; font-size: 13px;">Revoke All Public Links</button>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>
