@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Account Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'danger': '#ff4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans h-screen flex flex-col overflow-hidden m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="register.html" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-sm">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="app-container grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        
+        <aside class="sidebar p-[24px_16px] border-r border-border-color flex flex-col overflow-y-auto no-scrollbar">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="index.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted hover:bg-[#111] hover:text-white text-sm transition-all no-underline">
+                <i class="fa-solid fa-house w-5 mr-3 text-[16px]"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted hover:bg-[#111] hover:text-white text-sm transition-all no-underline">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-[16px]"></i> My Files
+            </a>
+            
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Account</div>
+            <a href="userprofile.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted hover:bg-[#111] hover:text-white text-sm transition-all no-underline">
+                <i class="fa-solid fa-user w-5 mr-3 text-[16px]"></i> My Profile
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg bg-[#111] text-white text-sm font-medium no-underline">
+                <i class="fa-solid fa-gear w-5 mr-3 text-[16px]"></i> Settings
+            </a>
+        </aside>
+
+        <main class="dashboard-main overflow-y-auto no-scrollbar p-10 bg-[#060505] m-5 rounded-[10px] border border-border-color">
+            <div class="flex items-center gap-[30px] mb-10 pb-10 border-b border-border-color">
+                <div class="w-[100px] h-[100px] bg-accent-blue rounded-full flex items-center justify-center text-[36px] font-bold text-white relative">
+                    JD
+                    <div class="absolute bottom-0 right-0 bg-white text-black w-7 h-7 rounded-full flex items-center justify-center text-[12px] cursor-pointer">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-[24px] font-bold m-0">Account Settings</h2>
+                    <p class="text-text-muted m-0">Manage your profile details and security preferences.</p>
+                </div>
+            </div>
+
+            <form>
+                <div class="text-base font-semibold mb-5 flex items-center gap-[10px]">
+                    <i class="fa-solid fa-address-card"></i> Personal Information
+                </div>
+                
+                <div class="grid grid-cols-2 gap-[30px] mb-10">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[11px] uppercase text-text-muted tracking-[1px]">First Name</label>
+                        <input type="text" class="bg-[#111] border border-border-color rounded-lg p-[12px_16px] text-white text-sm focus:outline-none focus:border-accent-blue transition-all" value="John">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[11px] uppercase text-text-muted tracking-[1px]">Last Name</label>
+                        <input type="text" class="bg-[#111] border border-border-color rounded-lg p-[12px_16px] text-white text-sm focus:outline-none focus:border-accent-blue transition-all" value="Doe">
+                    </div>
+                    <div class="flex flex-col gap-2 col-span-2">
+                        <label class="text-[11px] uppercase text-text-muted tracking-[1px]">Email Address</label>
+                        <input type="email" class="bg-[#111] border border-border-color rounded-lg p-[12px_16px] text-white text-sm focus:outline-none focus:border-accent-blue transition-all" value="john.doe@innovaturelabs.com">
+                    </div>
+                </div>
+
+                <div class="text-base font-semibold mb-5 flex items-center gap-[10px]">
+                    <i class="fa-solid fa-lock"></i> Authentication
+                </div>
+                
+                <div class="grid grid-cols-2 gap-[30px] mb-10">
+                    <div class="flex flex-col gap-2 col-span-2">
+                        <label class="text-[11px] uppercase text-text-muted tracking-[1px]">Old Password</label>
+                        <input type="password" class="bg-[#111] border border-border-color rounded-lg p-[12px_16px] text-white text-sm focus:outline-none focus:border-accent-blue transition-all" placeholder="Enter current password">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[11px] uppercase text-text-muted tracking-[1px]">New Password</label>
+                        <input type="password" class="bg-[#111] border border-border-color rounded-lg p-[12px_16px] text-white text-sm focus:outline-none focus:border-accent-blue transition-all" placeholder="New password">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[11px] uppercase text-text-muted tracking-[1px]">Confirm New Password</label>
+                        <input type="password" class="bg-[#111] border border-border-color rounded-lg p-[12px_16px] text-white text-sm focus:outline-none focus:border-accent-blue transition-all" placeholder="Confirm new password">
+                    </div>
+                </div>
+
+                <div class="text-base font-semibold mb-5 flex items-center gap-[10px] text-danger">
+                    <i class="fa-solid fa-circle-exclamation"></i> Danger Zone
+                </div>
+                <div class="mt-5 p-6 border border-[#2a1111] bg-[#110505] rounded-xl">
+                    <div class="text-sm font-medium">Disable Account</div>
+                    <p class="text-[12px] text-text-muted mt-[5px] mb-[15px]">Deactivating your account will restrict access to your files. This action can be reversed by an administrator.</p>
+                    <button type="button" class="bg-transparent text-danger border border-danger p-[8px_16px] rounded-xl text-[13px] font-semibold cursor-pointer hover:bg-danger hover:text-white transition-all">Disable My Account</button>
+                </div>
+
+                <div class="mt-10 pt-[30px] border-t border-border-color flex gap-[15px]">
+                    <button type="submit" class="bg-white text-black p-[12px_30px] rounded-[20px] font-semibold text-sm cursor-pointer">Save Changes</button>
+                    <a href="userprofile.html" class="bg-transparent text-text-muted p-[12px_30px] rounded-[20px] border border-border-color no-underline font-semibold text-sm text-center">Cancel</a>
+                </div>
+            </form>
+        </main>
+
+        <aside class="right-panel p-[24px_20px] border-l border-border-color overflow-y-auto no-scrollbar">
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Security Tip</div>
+                <p class="text-[12px] text-text-muted leading-[1.5] mb-5">Ensure your new password is at least 8 characters long and includes a mix of letters, numbers, and symbols.</p>
+                <a href="#" class="block w-auto p-[10px] bg-white text-black rounded-[20px] font-semibold cursor-pointer text-center text-sm no-underline">Privacy Policy</a>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

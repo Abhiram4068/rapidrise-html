@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'accent-white': '#e3e3e3',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bg-black text-white font-sans flex items-center justify-center h-screen m-0">
+
+    <div class="auth-card w-full max-w-[400px] bg-bg-card border border-border-color p-10 rounded-[10px] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div class="auth-header text-center mb-8">
+            <div class="logo text-2xl font-bold tracking-[-1px] mb-2">HiveDrive</div>
+            <div class="auth-subtitle text-text-muted text-sm">Welcome back. Please login to continue.</div>
+        </div>
+
+        <form>
+            <div class="form-group mb-5">
+                <label class="block text-[12px] uppercase tracking-[1px] text-text-muted mb-2">Email Address</label>
+                <div class="input-wrapper relative flex items-center">
+                    <i class="fa-solid fa-envelope absolute left-4 text-text-muted text-[14px]"></i>
+                    <input type="email" placeholder="name@example.com" required 
+                        class="w-full bg-[#111] border border-border-color py-3 pr-4 pl-[45px] rounded-[10px] text-white text-sm outline-none transition-all focus:border-accent-blue focus:bg-[#151515]">
+                </div>
+            </div>
+
+            <div class="form-group mb-5">
+                <label class="block text-[12px] uppercase tracking-[1px] text-text-muted mb-2">Password</label>
+                <div class="input-wrapper relative flex items-center">
+                    <i class="fa-solid fa-lock absolute left-4 text-text-muted text-[14px]"></i>
+                    <input type="password" placeholder="••••••••" required 
+                        class="w-full bg-[#111] border border-border-color py-3 pr-4 pl-[45px] rounded-[10px] text-white text-sm outline-none transition-all focus:border-accent-blue focus:bg-[#151515]">
+                </div>
+                <a href="#" class="forgot-password block text-right text-[12px] text-text-muted mt-2 no-underline">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-submit w-full p-[14px] bg-accent-white text-black border-none rounded-[10px] font-semibold text-sm cursor-pointer mt-[10px] transition-all hover:opacity-90 hover:-translate-y-[1px]">
+                Sign In
+            </button>
+        </form>
+
+        <div class="auth-footer mt-6 text-center text-[13px] text-text-muted flex flex-col gap-3">
+            <span>Don't have an account? <a href="register.html" class="text-accent-blue no-underline font-medium">Join Now</a></span>
+            <a href="index.html" class="back-home text-[12px] text-text-muted/70 no-underline transition-all hover:opacity-100 hover:text-white">
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive Drive | Upload Files</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'accent-white': '#e3e3e3',
+                        'danger': '#ff4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            * { -ms-overflow-style: none; scrollbar-width: none; }
+            *::-webkit-scrollbar { display: none; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.3s ease; }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans flex flex-col h-screen overflow-hidden m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-text-muted no-underline text-sm hover:text-white transition-colors">Log In</a>
+            <a href="#" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-sm">Join Now</a>
+            
+            <div class="relative flex items-center p-[4px_8px] rounded-lg cursor-pointer transition-colors hover:bg-[#111]" id="profileToggle">
+                <div class="flex items-center gap-[10px]">
+                    <div class="w-8 h-8 bg-accent-blue text-white rounded-full flex items-center justify-center text-[12px] font-semibold shrink-0">JD</div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-medium text-white">John Doe</span>
+                        <span class="text-[10px] text-text-muted">Project Manager</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-[10px] text-text-muted"></i>
+                </div>
+                <div class="absolute top-[calc(100%+10px)] right-0 w-[180px] bg-bg-card border border-border-color rounded-xl p-2 hidden z-[100] shadow-[0_10px_25px_rgba(0,0,0,0.5)]" id="profileDropdown">
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-text-muted no-underline text-[13px] rounded-md hover:bg-[#1a1a1a] hover:text-white transition-colors">
+                        <i class="fa-solid fa-user"></i> My Profile
+                    </a>
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-text-muted no-underline text-[13px] rounded-md hover:bg-[#1a1a1a] hover:text-white transition-colors">
+                        <i class="fa-solid fa-gear"></i> Settings
+                    </a>
+                    <hr class="border-0 border-t border-border-color my-2">
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-danger no-underline text-[13px] rounded-md hover:bg-[#1a1a1a] transition-colors">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        <aside class="p-[24px_16px] border-r border-border-color overflow-y-auto">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg bg-[#111] text-white no-underline text-sm transition-colors">
+                <i class="fa-solid fa-house w-5 mr-3 text-base"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm hover:bg-[#111] hover:text-white transition-colors">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-base"></i> My Files
+            </a>
+            <a href="recent.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm hover:bg-[#111] hover:text-white transition-colors">
+                <i class="fa-solid fa-clock w-5 mr-3 text-base"></i> Recent
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm hover:bg-[#111] hover:text-white transition-colors">
+                <i class="fa-solid fa-star w-5 mr-3 text-base"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm hover:bg-[#111] hover:text-white transition-colors">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-base"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm hover:bg-[#111] hover:text-white transition-colors">
+                <i class="fa-solid fa-folder w-5 mr-3 text-base"></i> Collections
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm hover:bg-[#111] hover:text-white transition-colors">
+                <i class="fa-solid fa-trash w-5 mr-3 text-base"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Recently Shared With</div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">3</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">you@innovaturelabs.com</span>
+                </div>
+            </div>
+            
+            <div class="mt-[10px] flex justify-between items-center p-[10px_12px] text-text-muted text-[12px] uppercase tracking-[0.5px] cursor-pointer border-t border-border-color hover:text-white transition-colors">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <main class="overflow-y-auto p-10">
+            <div class="mb-[30px]">
+                <h2 class="m-0 text-2xl font-semibold">Upload Files</h2>
+                <p class="text-text-muted text-sm mt-1">Attach files to your drive by dropping them below.</p>
+            </div>
+
+            <div class="w-full h-[200px] bg-bg-card border-2 border-dashed border-border-color rounded-[20px] flex flex-col items-center justify-center cursor-pointer transition-all duration-300 text-center mb-5 hover:border-accent-blue hover:bg-[#0f0f0f]" id="dropZone">
+                <i class="fa-solid fa-cloud-arrow-up text-[40px] text-accent-blue mb-[10px]"></i>
+                <span class="text-sm">Drop files here or click to upload</span>
+                <input type="file" id="fileInput" multiple class="hidden">
+            </div>
+
+            <div class="flex flex-col gap-[10px]" id="previewContainer"></div>
+
+            <div class="flex justify-end pt-5 border-t border-border-color mt-5">
+                <button class="bg-accent-white text-black p-[12px_30px] border-none rounded-[25px] font-semibold cursor-pointer transition-all hover:opacity-90 hover:-translate-y-[1px]" id="startUploadBtn">Confirm & Upload</button>
+            </div>
+        </main>
+
+        <aside class="p-[24px_20px] border-l border-border-color">
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="flex items-center gap-[10px] text-danger text-[13px] font-semibold">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>STORAGE CRITICAL</span>
+                </div>
+                <div class="h-1 bg-[#222] rounded-[2px] my-3">
+                    <div class="w-[93%] h-full bg-danger"></div>
+                </div>
+                <p class="text-[12px] text-text-muted m-0">14.08 GB of 15 GB used (93%)</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Profile Toggle Logic
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+        profileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+        });
+        window.addEventListener('click', () => profileDropdown.classList.add('hidden'));
+
+        // Upload Logic
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const uploadBtn = document.getElementById('startUploadBtn');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { 
+            e.preventDefault(); 
+            dropZone.classList.add('border-accent-blue');
+        });
+        dropZone.addEventListener('dragleave', () => { 
+            dropZone.classList.remove('border-accent-blue');
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-accent-blue');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                const fileId = Math.random().toString(36).substr(2, 9);
+                const html = `
+                    <div class="bg-bg-card border border-border-color p-[14px_16px] rounded-xl flex items-center gap-[15px] animate-fadeIn" id="${fileId}">
+                        <i class="fa-solid fa-file text-text-muted"></i>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium m-0">${file.name}</p>
+                            <span class="text-[12px] text-text-muted">${(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                        </div>
+                        <i class="fa-solid fa-xmark text-danger cursor-pointer" onclick="document.getElementById('${fileId}').remove()"></i>
+                    </div>
+                `;
+                previewContainer.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        uploadBtn.addEventListener('click', () => {
+            const count = previewContainer.querySelectorAll('div').length;
+            if (count === 0) return alert('Select files first.');
+            alert(`Uploading ${count} files...`);
+            previewContainer.innerHTML = '';
+        });
+    </script>
+</body>
+</html>

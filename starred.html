@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Starred Files</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'danger': '#ff4444',
+                        'star-gold': '#ffb100',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans h-screen flex flex-col overflow-hidden m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-text-muted no-underline text-sm hover:text-white transition-colors">Log In</a>
+            <a href="#" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-sm transition-opacity hover:opacity-90">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="app-container grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        
+        <aside class="sidebar p-[24px_16px] border-r border-border-color flex flex-col overflow-y-auto no-scrollbar bg-bg-black">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="index.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-house w-5 mr-3 text-base"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-base"></i> My Files
+            </a>
+            <a href="recent.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-clock w-5 mr-3 text-base"></i> Recent
+            </a>
+            <a href="starred.html" class="flex items-center p-[10px_12px] rounded-lg bg-[#111] text-white no-underline text-sm font-medium">
+                <i class="fa-solid fa-star w-5 mr-3 text-base"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-base"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder w-5 mr-3 text-base"></i> Collections
+            </a>
+            <a href="trash.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-trash w-5 mr-3 text-base"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Recently Shared With</div>
+            <div class="flex items-center gap-3 p-[8px_12px] rounded-lg cursor-pointer transition-colors hover:bg-[#111]">
+                <div class="w-7 h-7 rounded-full bg-border-color flex items-center justify-center text-[11px]">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden"><span class="text-[13px] font-medium block truncate">abhiram@innovaturelabs.com</span></div>
+            </div>
+            <div class="flex items-center gap-3 p-[8px_12px] rounded-lg cursor-pointer transition-colors hover:bg-[#111]">
+                <div class="w-7 h-7 rounded-full bg-border-color flex items-center justify-center text-[11px]">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden"><span class="text-[13px] font-medium block truncate">demo@innovaturelabs.com</span></div>
+            </div>
+            
+            <div class="mt-3 p-3 border-t border-border-color flex justify-between items-center text-[12px] text-text-muted cursor-pointer hover:text-white transition-colors">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <main class="file-explorer-main overflow-y-auto p-[24px_40px] no-scrollbar">
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="w-full max-w-[450px] bg-bg-card border border-border-color p-[10px_16px] rounded-xl flex items-center">
+                    <i class="fa fa-search text-text-muted"></i>
+                    <input type="text" placeholder="Search Starred Files" class="bg-transparent border-none text-white ml-3 w-full outline-none text-sm">
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="text-[20px] font-semibold flex items-center gap-2.5">Starred Files</div>
+                <div class="text-text-muted text-sm">3 items</div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-5 mb-10">
+                <div class="bg-bg-card border border-border-color rounded-[5px] overflow-hidden transition-all duration-200 cursor-pointer relative hover:border-[#333] hover:-translate-y-0.5 group">
+                    <button class="absolute top-2.5 right-2.5 z-10 bg-black/50 border-none text-star-gold w-[30px] h-[30px] rounded-full flex items-center justify-center transition-all hover:bg-black/80 hover:scale-110" title="Unstar">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <a href="singlefile.html" class="no-underline">
+                        <div class="h-[140px] bg-[#111] flex items-center justify-center relative border-b border-border-color">
+                            <i class="fa-solid fa-file-pdf text-[40px] text-text-muted absolute file-icon"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-sm font-medium mb-2 block truncate text-white">Project_Proposal_2024.pdf</span>
+                            <div class="flex justify-between text-[12px] text-text-muted">
+                                <span>4.2 MB</span>
+                                <span>2h ago</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="bg-bg-card border border-border-color rounded-[5px] overflow-hidden transition-all duration-200 cursor-pointer relative hover:border-[#333] hover:-translate-y-0.5 group">
+                    <button class="absolute top-2.5 right-2.5 z-10 bg-black/50 border-none text-star-gold w-[30px] h-[30px] rounded-full flex items-center justify-center transition-all hover:bg-black/80 hover:scale-110" title="Unstar">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <a href="#" class="no-underline">
+                        <div class="h-[140px] bg-[#111] flex items-center justify-center relative border-b border-border-color">
+                            <i class="fa-solid fa-file-word text-[40px] text-text-muted absolute file-icon"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-sm font-medium mb-2 block truncate text-white">Q4_Financial_Report.docx</span>
+                            <div class="flex justify-between text-[12px] text-text-muted">
+                                <span>1.8 MB</span>
+                                <span>Yesterday</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="bg-bg-card border border-border-color rounded-[5px] overflow-hidden transition-all duration-200 cursor-pointer relative hover:border-[#333] hover:-translate-y-0.5 group">
+                    <button class="absolute top-2.5 right-2.5 z-10 bg-black/50 border-none text-star-gold w-[30px] h-[30px] rounded-full flex items-center justify-center transition-all hover:bg-black/80 hover:scale-110" title="Unstar">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                    <a href="#" class="no-underline">
+                        <div class="h-[140px] bg-[#111] flex items-center justify-center relative border-b border-border-color">
+                            <i class="fa-solid fa-image text-[40px] text-text-muted absolute file-icon"></i>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-sm font-medium mb-2 block truncate text-white">Hero_Background.png</span>
+                            <div class="flex justify-between text-[12px] text-text-muted">
+                                <span>2.4 MB</span>
+                                <span>Feb 08</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <aside class="right-panel p-[24px_20px] border-l border-border-color">
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Starred Items</div>
+                <p class="text-[12px] text-text-muted leading-relaxed mb-5">Starred files are your most important documents. Click the star icon on any file to remove it from this list.</p>
+            </div>
+
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="flex items-center gap-2.5 text-danger text-[13px] font-semibold">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>STORAGE CRITICAL</span>
+                </div>
+                <div class="h-1 bg-[#222] rounded-[2px] my-3">
+                    <div class="w-[93%] h-full bg-danger"></div>
+                </div>
+                <p class="text-[12px] text-text-muted m-0">14.08 GB of 15 GB used (93%)</p>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

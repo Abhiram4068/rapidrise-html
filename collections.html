@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive Drive | My Drive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'folder-yellow': '#fbbf24',
+                        'danger': '#ff4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Maintaining the specific scrollbar hiding requirement */
+        *::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans flex flex-col h-screen overflow-hidden m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-text-muted no-underline text-[14px]">Log In</a>
+            <a href="#" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-[14px]">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        
+        <aside class="p-[24px_16px] border-r border-border-color flex flex-col overflow-y-auto bg-bg-black h-full">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] m-[24px_0_12px_12px]">Main Feed</div>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg bg-[#111] text-white no-underline text-[14px] font-medium transition-all">
+                <i class="fa-solid fa-house w-5 mr-3 text-[15px]"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] hover:bg-[#111] hover:text-white transition-all">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-[15px]"></i> My Files
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] hover:bg-[#111] hover:text-white transition-all">
+                <i class="fa-solid fa-clock w-5 mr-3 text-[15px]"></i> Recent
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] hover:bg-[#111] hover:text-white transition-all">
+                <i class="fa-solid fa-star w-5 mr-3 text-[15px]"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] hover:bg-[#111] hover:text-white transition-all">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-[15px]"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] m-[24px_0_12px_12px]">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] hover:bg-[#111] hover:text-white transition-all">
+                <i class="fa-solid fa-folder w-5 mr-3 text-[15px]"></i> Collections
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] hover:bg-[#111] hover:text-white transition-all">
+                <i class="fa-solid fa-trash w-5 mr-3 text-[15px]"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] m-[24px_0_12px_12px]">Recently Shared With</div>
+            <div class="flex items-center gap-3 p-[8px_12px] rounded-lg cursor-pointer min-w-0 hover:bg-[#111] transition-all group">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white whitespace-nowrap overflow-hidden text-overflow-ellipsis">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-[8px_12px] rounded-lg cursor-pointer min-w-0 hover:bg-[#111] transition-all group">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white whitespace-nowrap overflow-hidden text-overflow-ellipsis">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-[8px_12px] rounded-lg cursor-pointer min-w-0 hover:bg-[#111] transition-all group">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">3</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white whitespace-nowrap overflow-hidden text-overflow-ellipsis">you@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="mt-3 p-3 border-t border-border-color flex justify-between items-center text-[12px] uppercase tracking-[0.5px] text-text-muted cursor-pointer hover:text-white transition-all">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <main class="overflow-y-auto p-[24px_40px]">
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="w-full max-w-[450px] bg-bg-card border border-border-color p-[10px_16px] rounded-xl flex items-center">
+                    <i class="fa fa-search text-text-muted"></i>
+                    <input type="text" placeholder="Search Drive" class="bg-transparent border-none text-white ml-3 w-full outline-none text-[14px]">
+                </div>
+                <button class="bg-accent-blue text-white p-[10px_20px] rounded-[10px] font-semibold text-[14px] border-none cursor-pointer flex items-center gap-2.5" onclick="openCollectionModal()">
+                    <i class="fa fa-folder-plus"></i> New Collection
+                </button>
+            </div>
+
+            <div class="flex justify-between items-center mb-5">
+                <div class="text-[20px] font-semibold">My Collections</div>
+                <div class="text-text-muted text-[14px]">6 collections</div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-10">
+                <a href="filesinsidecollection.html" class="bg-bg-card border border-border-color p-4 rounded-xl flex items-center gap-4 no-underline text-inherit transition-all cursor-pointer hover:border-[#333] hover:bg-[#111]">
+                    <i class="fa-solid fa-folder text-[24px] text-folder-yellow"></i>
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis">Project Assets</span>
+                        <span class="text-[11px] text-text-muted mt-[2px]">24 files • 1.2 GB</span>
+                    </div>
+                </a>
+                <a href="#" class="bg-bg-card border border-border-color p-4 rounded-xl flex items-center gap-4 no-underline text-inherit transition-all cursor-pointer hover:border-[#333] hover:bg-[#111]">
+                    <i class="fa-solid fa-folder text-[24px] text-folder-yellow"></i>
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis">Client Deliverables</span>
+                        <span class="text-[11px] text-text-muted mt-[2px]">12 files • 450 MB</span>
+                    </div>
+                </a>
+                <a href="#" class="bg-bg-card border border-border-color p-4 rounded-xl flex items-center gap-4 no-underline text-inherit transition-all cursor-pointer hover:border-[#333] hover:bg-[#111]">
+                    <i class="fa-solid fa-folder text-[24px] text-folder-yellow"></i>
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis">Marketing Q1</span>
+                        <span class="text-[11px] text-text-muted mt-[2px]">85 files • 2.4 GB</span>
+                    </div>
+                </a>
+                <a href="#" class="bg-bg-card border border-border-color p-4 rounded-xl flex items-center gap-4 no-underline text-inherit transition-all cursor-pointer hover:border-[#333] hover:bg-[#111]">
+                    <i class="fa-solid fa-folder text-[24px] text-folder-yellow"></i>
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis">Personal Photos</span>
+                        <span class="text-[11px] text-text-muted mt-[2px]">1.2k files • 5.1 GB</span>
+                    </div>
+                </a>
+                <a href="#" class="bg-bg-card border border-border-color p-4 rounded-xl flex items-center gap-4 no-underline text-inherit transition-all cursor-pointer hover:border-[#333] hover:bg-[#111]">
+                    <i class="fa-solid fa-folder text-[24px] text-folder-yellow"></i>
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis">Legal Documents</span>
+                        <span class="text-[11px] text-text-muted mt-[2px]">5 files • 12 MB</span>
+                    </div>
+                </a>
+                <a href="#" class="bg-bg-card border border-border-color p-4 rounded-xl flex items-center gap-4 no-underline text-inherit transition-all cursor-pointer hover:border-[#333] hover:bg-[#111]">
+                    <i class="fa-solid fa-folder text-[24px] text-folder-yellow"></i>
+                    <div class="flex flex-col overflow-hidden">
+                        <span class="text-[14px] font-medium whitespace-nowrap overflow-hidden text-ellipsis">Backups</span>
+                        <span class="text-[11px] text-text-muted mt-[2px]">2 files • 8.4 GB</span>
+                    </div>
+                </a>
+            </div>
+        </main>
+
+        <aside class="p-[24px_20px] border-l border-border-color overflow-y-auto">
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="text-[16px] font-semibold mb-2">Storage Information</div>
+                <p class="text-[12px] text-text-muted leading-[1.5] mb-5">Folders allow you to organize your workspace. You currently have 6 main directories.</p>
+                <button class="block w-full p-2.5 bg-[#e3e3e3] text-black border-none rounded-[20px] font-semibold cursor-pointer mb-2.5">Upload File</button>
+            </div>
+
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="flex items-center gap-2.5 text-danger text-[13px] font-semibold">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>STORAGE CRITICAL</span>
+                </div>
+                <div class="h-1 bg-[#222] rounded-sm mt-3 mb-3">
+                    <div class="w-[93%] h-full bg-danger"></div>
+                </div>
+                <p class="text-[12px] text-text-muted m-0">14.08 GB of 15 GB used (93%)</p>
+            </div>
+        </aside>
+    </div>
+
+    <div class="fixed inset-0 bg-black/80 backdrop-blur-[4px] hidden justify-center items-center z-[2000]" id="newCollectionModal">
+        <div class="bg-bg-card border border-border-color w-full max-w-[420px] p-6 rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+            <div class="text-[18px] font-semibold mb-6 flex justify-between items-center">
+                <span>Create New Collection</span>
+                <i class="fa-solid fa-xmark cursor-pointer text-text-muted hover:text-white transition-all" onclick="closeCollectionModal()"></i>
+            </div>
+            
+            <div class="mb-5">
+                <label class="block text-[11px] text-text-muted mb-2 uppercase tracking-[0.5px]">Collection Name</label>
+                <input type="text" id="collectionName" placeholder="e.g. Brand Guidelines" class="w-full bg-[#111] border border-border-color rounded-lg p-3 text-white outline-none focus:border-accent-blue transition-all">
+            </div>
+
+            <div class="mb-5">
+                <label class="block text-[11px] text-text-muted mb-2 uppercase tracking-[0.5px]">Description</label>
+                <textarea id="collectionDesc" rows="3" placeholder="What's inside this collection?" class="w-full bg-[#111] border border-border-color rounded-lg p-3 text-white outline-none focus:border-accent-blue transition-all resize-none"></textarea>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <button class="flex-1 bg-transparent text-text-muted border border-border-color p-3 rounded-lg font-semibold cursor-pointer hover:bg-[#111] hover:text-white transition-all" onclick="closeCollectionModal()">Cancel</button>
+                <button class="flex-[2] bg-accent-blue text-white border-none p-3 rounded-lg font-semibold cursor-pointer hover:opacity-90 transition-all" onclick="handleCreateCollection()">Create Collection</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const collectionModal = document.getElementById('newCollectionModal');
+
+        function openCollectionModal() {
+            collectionModal.style.display = 'flex';
+        }
+
+        function closeCollectionModal() {
+            collectionModal.style.display = 'none';
+            document.getElementById('collectionName').value = '';
+            document.getElementById('collectionDesc').value = '';
+        }
+
+        function handleCreateCollection() {
+            const name = document.getElementById('collectionName').value;
+            if (!name) {
+                alert("Please enter a collection name.");
+                return;
+            }
+            alert(`Success! Collection "${name}" has been created.`);
+            closeCollectionModal();
+        }
+
+        window.onclick = function(event) {
+            if (event.target == collectionModal) {
+                closeCollectionModal();
+            }
+        }
+    </script>
+</body>
+</html>

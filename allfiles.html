@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive Drive | My Files</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'danger': '#ff4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Maintaining scroll behavior from original */
+        *::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+        body { height: 100vh; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-bg-black text-white flex flex-col font-sans m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-text-muted no-underline text-[14px]">Log In</a>
+            <a href="#" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-[14px]">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        
+        <aside class="p-[24px_16px] border-r border-border-color flex flex-col overflow-y-auto bg-bg-black">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] m-[24px_0_12px_12px]">Main Feed</div>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-white no-underline text-[14px] transition-all bg-[#111] mb-1">
+                <i class="fa-solid fa-house w-5 mr-3 text-[16px]"></i> Home
+            </a>
+            <a href="/tailwind/pageinatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] transition-all hover:bg-[#111] hover:text-white mb-1">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-[16px]"></i> My Files
+            </a>
+            <a href="recent.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] transition-all hover:bg-[#111] hover:text-white mb-1">
+                <i class="fa-solid fa-clock w-5 mr-3 text-[16px]"></i> Recent
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] transition-all hover:bg-[#111] hover:text-white mb-1">
+                <i class="fa-solid fa-star w-5 mr-3 text-[16px]"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] transition-all hover:bg-[#111] hover:text-white mb-1">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-[16px]"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] m-[24px_0_12px_12px]">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] transition-all hover:bg-[#111] hover:text-white mb-1">
+                <i class="fa-solid fa-folder w-5 mr-3 text-[16px]"></i> Collections
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-[14px] transition-all hover:bg-[#111] hover:text-white mb-1">
+                <i class="fa-solid fa-trash w-5 mr-3 text-[16px]"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] m-[24px_0_12px_12px]">Recently Shared With</div>
+            <div class="flex items-center gap-3 p-2 px-3 cursor-pointer min-w-0 transition-colors hover:bg-[#111]">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white truncate">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 px-3 cursor-pointer min-w-0 transition-colors hover:bg-[#111]">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white truncate">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-2 px-3 cursor-pointer min-w-0 transition-colors hover:bg-[#111]">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">3</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white truncate">you@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="mt-[10px] flex justify-between items-center p-[10px_12px] text-text-muted text-[12px] uppercase tracking-[0.5px] cursor-pointer border-t border-border-color hover:text-white transition-colors">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <main class="overflow-y-auto p-[24px_40px]">
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="w-full max-w-[450px] bg-bg-card border border-border-color p-[10px_16px] rounded-[12px] flex items-center">
+                    <i class="fa fa-search text-text-muted"></i>
+                    <input type="text" placeholder="Search Your Files" class="bg-transparent border-none text-white ml-3 w-full outline-none text-[14px]">
+                </div>
+                <a href="uploadfile.html" class="bg-accent-blue text-white p-[10px_20px] rounded-[10px] no-underline font-semibold text-[14px] hover:opacity-90 flex items-center gap-[10px] transition-opacity">
+                    <i class="fa fa-plus"></i> New Document
+                </a>
+            </div>
+
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="text-[20px] font-semibold">My Files</div>
+                <div class="text-text-muted text-[14px]">1,248 items</div>
+            </div>
+
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="text-left p-3 px-4 text-[11px] uppercase text-text-muted tracking-[1px] border-bottom border-border-color w-[40px]">#</th>
+                        <th class="text-left p-3 px-4 text-[11px] uppercase text-text-muted tracking-[1px] border-bottom border-border-color">Name</th>
+                        <th class="text-left p-3 px-4 text-[11px] uppercase text-text-muted tracking-[1px] border-bottom border-border-color w-[120px]">Size</th>
+                        <th class="text-left p-3 px-4 text-[11px] uppercase text-text-muted tracking-[1px] border-bottom border-border-color w-[120px]">Modified</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-[#141414]">
+                    <tr class="group cursor-pointer transition-colors hover:bg-[#050505]">
+                        <td class="p-4 text-[12px] text-text-muted align-middle">01</td>
+                        <td class="p-4 align-middle">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-pdf text-[18px] text-text-muted"></i>
+                                <a href="singlefile.html" class="text-white no-underline text-[14px]">Project_Proposal_2024.pdf</a>
+                            </div>
+                        </td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">4.2 MB</td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">2h ago</td>
+                    </tr>
+                    <tr class="group cursor-pointer transition-colors hover:bg-[#050505]">
+                        <td class="p-4 text-[12px] text-text-muted align-middle">02</td>
+                        <td class="p-4 align-middle">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-word text-[18px] text-text-muted"></i>
+                                <span class="text-[14px]">Q4_Financial_Report.docx</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">1.8 MB</td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">Yesterday</td>
+                    </tr>
+                    <tr class="group cursor-pointer transition-colors hover:bg-[#050505]">
+                        <td class="p-4 text-[12px] text-text-muted align-middle">03</td>
+                        <td class="p-4 align-middle">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-image text-[18px] text-text-muted"></i>
+                                <span class="text-[14px]">branding_assets_final.zip</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">124 MB</td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">3 days ago</td>
+                    </tr>
+                    <tr class="group cursor-pointer transition-colors hover:bg-[#050505]">
+                        <td class="p-4 text-[12px] text-text-muted align-middle">04</td>
+                        <td class="p-4 align-middle">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-code text-[18px] text-text-muted"></i>
+                                <span class="text-[14px]">index_backup.html</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">12 KB</td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">Feb 12, 2026</td>
+                    </tr>
+                    <tr class="group cursor-pointer transition-colors hover:bg-[#050505]">
+                        <td class="p-4 text-[12px] text-text-muted align-middle">05</td>
+                        <td class="p-4 align-middle">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-video text-[18px] text-text-muted"></i>
+                                <span class="text-[14px]">marketing_video_v2.mp4</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">45.5 MB</td>
+                        <td class="p-4 text-text-muted text-[14px] align-middle">Feb 10, 2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <aside class="p-[24px_20px] border-l border-border-color">
+            <div class="bg-bg-card border border-border-color rounded-[12px] p-5 mb-4">
+                <div class="text-[16px] font-semibold mb-2">File Actions</div>
+                <p class="text-[12px] text-text-muted leading-[1.5] mb-5">Select a file to view detailed metadata, access history, and sharing permissions.</p>
+                <button class="block w-full p-[10px] bg-white text-black border-none rounded-[20px] font-semibold cursor-pointer mb-[10px] transition-opacity hover:opacity-90">Upload New File</button>
+            </div>
+
+            <div class="bg-bg-card border border-border-color rounded-[12px] p-5 mb-4">
+                <div class="flex items-center gap-[10px] text-danger text-[13px] font-semibold">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>STORAGE CRITICAL</span>
+                </div>
+                <div class="h-1 bg-[#222] rounded-[2px] my-3">
+                    <div class="w-[93%] h-full bg-danger"></div>
+                </div>
+                <p class="text-[12px] text-text-muted m-0">14.08 GB of 15 GB used (93%)</p>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Shared Files</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'danger': '#ff4444',
+                        'success': '#00c851',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            .modal-overlay { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(4px); }
+        }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans h-screen flex flex-col overflow-hidden m-0">
+
+    <div id="manageLinkModal" class="modal-overlay fixed inset-0 hidden items-center justify-center z-[1000]">
+        <div class="bg-bg-card border border-border-color p-[30px] rounded-[16px] w-full max-w-[400px] text-center">
+            <div class="text-[18px] font-semibold mb-3">Manage Share Link</div>
+            <p class="text-sm text-text-muted mb-6 leading-relaxed">Anyone with the link can currently view this file. You can revoke access immediately.</p>
+            <div class="flex gap-3">
+                <button class="flex-1 p-3 rounded-[10px] font-semibold cursor-pointer border-none bg-[#222] text-white" onclick="closeModal('manageLinkModal')">Keep Active</button>
+                <button class="flex-1 p-3 rounded-[10px] font-semibold cursor-pointer border-none bg-danger text-white">Revoke Access</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="login.html" class="text-text-muted no-underline text-sm">Log In</a>
+            <a href="register.html" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-sm">Join Now</a>
+            
+            <div class="relative flex items-center p-[4px_8px] rounded-lg cursor-pointer transition-colors border border-transparent hover:bg-[#111]" id="profileToggle">
+                <div class="flex items-center gap-[10px]">
+                    <div class="w-8 h-8 bg-accent-blue text-white rounded-full flex items-center justify-center text-[12px] font-semibold shrink-0">JD</div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[13px] font-medium text-white">John Doe</span>
+                        <span class="text-[10px] text-text-muted">Project Manager</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-[10px] text-text-muted ml-1"></i>
+                </div>
+                <div class="absolute top-[calc(100%+10px)] right-0 w-[180px] bg-bg-card border border-border-color rounded-xl p-2 hidden z-[100] shadow-[0_10px_25px_rgba(0,0,0,0.5)]" id="profileDropdown">
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-text-muted no-underline text-[13px] rounded-md transition-colors hover:bg-[#1a1a1a] hover:text-white">
+                        <i class="fa-solid fa-user"></i> My Profile
+                    </a>
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-text-muted no-underline text-[13px] rounded-md transition-colors hover:bg-[#1a1a1a] hover:text-white">
+                        <i class="fa-solid fa-gear"></i> Settings
+                    </a>
+                    <hr class="border-0 border-t border-border-color my-2">
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-danger no-underline text-[13px] rounded-md transition-colors hover:bg-[#1a1a1a]">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        
+        <aside class="sidebar p-[24px_16px] border-r border-border-color flex flex-col no-scrollbar overflow-y-auto">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="index.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-house w-5 mr-3 text-base"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-base"></i> My Files
+            </a>
+            <a href="recent.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-clock w-5 mr-3 text-base"></i> Recent
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-star w-5 mr-3 text-base"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg bg-[#111] text-white no-underline text-sm transition-colors">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-base"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder w-5 mr-3 text-base"></i> Collections
+            </a>
+            <a href="archive.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-box-archive w-5 mr-3 text-base"></i> Archive
+            </a>
+            <a href="trash.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-trash w-5 mr-3 text-base"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Recently Shared With</div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">A</div>
+                <div class="flex-1 min-w-0 overflow-hidden"><span class="text-[13px] font-medium text-white block truncate">abhiram@innovaturelabs.com</span></div>
+            </div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">D</div>
+                <div class="flex-1 min-w-0 overflow-hidden"><span class="text-[13px] font-medium text-white block truncate">demo@innovaturelabs.com</span></div>
+            </div>
+        </aside>
+
+        <main class="file-explorer-main overflow-y-auto p-[24px_40px] no-scrollbar">
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="text-[20px] font-semibold">Shared Files</div>
+                <div class="text-text-muted text-sm">2 items actively shared</div>
+            </div>
+
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">File Name</th>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">Shared With</th>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">View Status</th>
+                        <th class="text-right p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="hover:bg-[#050505]">
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <i class="fa-solid fa-file-pdf mr-[10px] text-danger"></i> Final_Pitch_Deck.pdf
+                        </td>
+                        <td class="p-4 text-sm border-b border-[#141414] text-text-muted">Public Link</td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <span class="text-[11px] p-[4px_8px] rounded-[4px] bg-[rgba(0,200,81,0.1)] text-success">42 Views</span>
+                        </td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <div class="flex gap-4 justify-end items-center">
+                                <button class="bg-none border-none text-[13px] font-medium cursor-pointer transition-colors text-accent-blue hover:underline" onclick="openModal('manageLinkModal')">Manage Link</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-[#050505]">
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <i class="fa-solid fa-file-excel mr-[10px] text-success"></i> Budget_Sheet_Q1.xlsx
+                        </td>
+                        <td class="p-4 text-sm border-b border-[#141414] text-text-muted">abhiram@innovaturelabs.com</td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <span class="text-[11px] p-[4px_8px] rounded-[4px] bg-[rgba(0,200,81,0.1)] text-success">12 Views</span>
+                        </td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <div class="flex gap-4 justify-end items-center">
+                                <button class="bg-none border-none text-[13px] font-medium cursor-pointer transition-colors text-accent-blue hover:underline" onclick="openModal('manageLinkModal')">Manage Link</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <a href="viewallshares.html" class="flex justify-between items-center p-[15px_16px] no-underline text-inherit text-xs uppercase tracking-wider text-text-muted border-t border-border-color hover:text-white transition-colors">
+                <span>View all shared files</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </a>
+
+            <div class="text-[20px] font-semibold mb-[30px] mt-[50px]">Recently Shared With</div>
+
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">Email ID</th>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">File Name</th>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">Status</th>
+                        <th class="text-right p-[12px_16px] text-[11px] uppercase text-text-muted border-b border-border-color">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="hover:bg-[#050505]">
+                        <td class="p-4 text-sm border-b border-[#141414] text-accent-blue">abhiram@innovaturelabs.com</td>
+                        <td class="p-4 text-sm border-b border-[#141414]">Project_Spec_v2.docx</td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <span class="text-[11px] p-[4px_8px] rounded-[4px] bg-[rgba(59,130,246,0.1)] text-accent-blue">Active</span>
+                        </td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <div class="flex gap-4 justify-end items-center">
+                                <button class="bg-none border-none text-[13px] font-medium cursor-pointer transition-colors text-accent-blue hover:underline" onclick="openModal('manageLinkModal')">Manage</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-[#050505]">
+                        <td class="p-4 text-sm border-b border-[#141414] text-accent-blue">demo@innovaturelabs.com</td>
+                        <td class="p-4 text-sm border-b border-[#141414]">Branding_Guidelines.zip</td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <span class="text-[11px] p-[4px_8px] rounded-[4px] bg-[rgba(255,68,68,0.1)] text-danger">Expired</span>
+                        </td>
+                        <td class="p-4 text-sm border-b border-[#141414]">
+                            <div class="flex gap-4 justify-end items-center">
+                                <button class="bg-none border-none text-[13px] font-medium cursor-pointer transition-colors text-accent-blue hover:underline" onclick="openModal('manageLinkModal')">Manage</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <a href="viewallshares.html" class="flex justify-between items-center p-[15px_16px] no-underline text-inherit text-xs uppercase tracking-wider text-text-muted border-t border-border-color hover:text-white transition-colors">
+                <span>View all shared files</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </a>
+        </main>
+
+        <aside class="right-panel p-[24px_20px] border-l border-border-color">
+            <div class="p-4 rounded-xl border border-accent-blue bg-bg-card">
+                <div class="text-sm font-semibold mb-2 text-accent-blue">Sharing Overview</div>
+                <p class="text-[12px] text-text-muted leading-relaxed">
+                    These are files you have shared with others. You can track view counts or revoke access at any time to keep your data secure.
+                </p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) { event.target.style.display = 'none'; }
+            if (!event.target.closest('#profileToggle')) {
+                profileDropdown.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

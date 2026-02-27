@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive | Shared Files</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-white': '#e3e3e3',
+                        'accent-blue': '#3b82f6',
+                        'danger': '#ff4444',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans flex flex-col h-screen overflow-hidden m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-text-muted no-underline text-sm">Log In</a>
+            <a href="#" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-sm">Join Now</a>
+        </div>
+    </nav>
+
+    <div class="grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        <aside class="p-[24px_16px] border-r border-border-color flex flex-col overflow-y-auto no-scrollbar">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-house w-5 mr-3 text-base"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-base"></i> My Files
+            </a>
+            <a href="recent.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-clock w-5 mr-3 text-base"></i> Recent
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-star w-5 mr-3 text-base"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-white bg-[#111] no-underline text-sm transition-colors">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-base"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder w-5 mr-3 text-base"></i> Collections
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-trash w-5 mr-3 text-base"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Recently Shared With</div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="mt-[10px] flex justify-between items-center p-[10px_12px] text-text-muted text-[12px] uppercase tracking-[0.5px] cursor-pointer border-t border-border-color">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <main class="overflow-y-auto p-[24px_40px] no-scrollbar">
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="w-full max-w-[450px] bg-[#0a0a0a] border border-border-color p-[10px_16px] rounded-xl flex items-center">
+                    <i class="fa fa-search text-text-muted"></i>
+                    <input type="text" placeholder="Search Shared Files" class="bg-transparent border-none text-white ml-3 w-full outline-none text-sm">
+                </div>
+                <button class="bg-accent-blue text-white p-[10px_20px] rounded-xl no-underline font-semibold text-sm border-none cursor-pointer transition-opacity hover:opacity-90 flex items-center gap-2.5">
+                    <i class="fa fa-share-nodes"></i> Share Document
+                </button>
+            </div>
+
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="text-[20px] font-semibold">Shared Files</div>
+                <div class="text-text-muted text-sm">42 items shared</div>
+            </div>
+
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted tracking-[1px] border-b border-border-color">File Name</th>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted tracking-[1px] border-b border-border-color">Shared With</th>
+                        <th class="text-left p-[12px_16px] text-[11px] uppercase text-text-muted tracking-[1px] border-b border-border-color">View Status</th>
+                        <th class="text-right p-[12px_16px] text-[11px] uppercase text-text-muted tracking-[1px] border-b border-border-color">Manage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="transition-colors cursor-pointer hover:bg-[#050505] group">
+                        <td class="p-4 text-sm vertical-middle border-b border-[#141414]">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-pdf text-text-muted text-[18px]"></i>
+                                <span>Project_Proposal_2024.pdf</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-sm vertical-middle text-text-muted border-b border-[#141414]">abhiram@innovaturelabs.com</td>
+                        <td class="p-4 text-sm vertical-middle border-b border-[#141414]">
+                            <span class="bg-[#111] p-[4px_8px] rounded-md text-[12px] text-accent-white">Opened 2m ago</span>
+                        </td>
+                        <td class="p-4 text-sm vertical-middle text-right border-b border-[#141414]">
+                            <a href="#" class="text-accent-blue no-underline font-medium hover:underline">Edit Access</a>
+                        </td>
+                    </tr>
+                    <tr class="transition-colors cursor-pointer hover:bg-[#050505] group">
+                        <td class="p-4 text-sm vertical-middle border-b border-[#141414]">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-file-word text-text-muted text-[18px]"></i>
+                                <span>Q4_Financial_Report.docx</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-sm vertical-middle text-text-muted border-b border-[#141414]">demo@innovaturelabs.com</td>
+                        <td class="p-4 text-sm vertical-middle border-b border-[#141414]">
+                            <span class="bg-[#111] p-[4px_8px] rounded-md text-[12px] text-accent-white">Never Opened</span>
+                        </td>
+                        <td class="p-4 text-sm vertical-middle text-right border-b border-[#141414]">
+                            <a href="#" class="text-accent-blue no-underline font-medium hover:underline">Edit Access</a>
+                        </td>
+                    </tr>
+                    <tr class="transition-colors cursor-pointer hover:bg-[#050505] group">
+                        <td class="p-4 text-sm vertical-middle border-none">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-image text-text-muted text-[18px]"></i>
+                                <span>branding_assets_final.zip</span>
+                            </div>
+                        </td>
+                        <td class="p-4 text-sm vertical-middle text-text-muted border-none">Public Link</td>
+                        <td class="p-4 text-sm vertical-middle border-none">
+                            <span class="bg-[#111] p-[4px_8px] rounded-md text-[12px] text-accent-white">124 Views</span>
+                        </td>
+                        <td class="p-4 text-sm vertical-middle text-right border-none">
+                            <a href="#" class="text-accent-blue no-underline font-medium hover:underline">Revoke</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <aside class="p-[24px_20px] border-l border-border-color overflow-y-auto no-scrollbar">
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Shared Insights</div>
+                <p class="text-[12px] text-text-muted leading-relaxed mb-5">Track how others are interacting with your documents. You can revoke access or change permissions at any time.</p>
+            </div>
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Quick Security</div>
+                <p class="text-[12px] text-text-muted leading-relaxed mb-5">Ensure your sensitive documents are only visible to the right people.</p>
+                <button class="w-full p-[10px] bg-[#111] text-white border border-border-color rounded-[20px] cursor-pointer text-[13px] hover:bg-[#1a1a1a] transition-colors">Revoke All Public Links</button>
+            </div>
+        </aside>
+    </div>
+
+</body>
+</html>

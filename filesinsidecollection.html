@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive Drive | Project Assets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-col': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-white': '#e3e3e3',
+                        'danger': '#ff4444',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbars */
+        *::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: 'Inter', sans-serif; }
+
+        .nav-item { display: flex; align-items: center; padding: 10px 12px; border-radius: 8px; color: #808080; text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; }
+        .nav-item i { width: 20px; margin-right: 12px; font-size: 15px; }
+        .nav-item:hover { background: #111; color: #fff; }
+        .nav-item.active { background: #111; color: #fff; font-weight: 500; }
+
+        .file-card { background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 5px; overflow: hidden; transition: transform 0.2s, border-color 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .file-card:hover { border-color: #333; transform: translateY(-2px); }
+
+        .file-thumb { height: 140px; background: #111; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid #1a1a1a; }
+        .file-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+        .file-thumb i { font-size: 40px; color: #808080; position: absolute; }
+
+        .page-btn { background: #0a0a0a; border: 1px solid #1a1a1a; color: white; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+        .page-btn:hover { background: #111; }
+        .page-btn.active { border-color: #3b82f6; color: #3b82f6; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #0a0a0a; border: 1px solid #1a1a1a; width: 100%; max-width: 400px; padding: 24px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+        .form-group input, .form-group textarea { width: 100%; background: #111; border: 1px solid #1a1a1a; border-radius: 8px; padding: 12px; color: white; font-family: inherit; outline: none; box-sizing: border-box; }
+        .form-group input:focus { border-color: #3b82f6; }
+
+        .btn-delete { background: transparent; color: #ff4444; border: 1px solid #301010; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.2s, border-color 0.2s; width: 100%; }
+        .btn-delete:hover { background: #2a0000; border-color: #ff4444; }
+
+        .btn-manage { background: transparent; color: #ffffff; border: 1px solid #1a1a1a; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background 0.2s; width: 100%; margin-bottom: 12px; }
+        .btn-manage:hover { background: #111; }
+
+        .user-item { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; cursor: pointer; min-width: 0; transition: background 0.2s; }
+        .user-item:hover { background: #111; }
+        .modal-content { 
+        background: #0a0a0a; 
+        border: 1px solid #1a1a1a; 
+        width: 100%; 
+        padding: 24px; 
+        border-radius: 16px; 
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
+    }
+
+    /* Target specific width for Manage Modal */
+    .modal-manage {
+        max-width: 600px; /* Increased from 400px */
+    }
+
+    /* Target specific width for Delete Modal */
+    .modal-delete {
+        max-width: 400px;
+    }
+    </style>
+</head>
+<body class="bg-bg-black text-white flex flex-col overflow-hidden" style="height:100vh;">
+
+    <!-- NAV -->
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-col flex-shrink-0">
+        <div class="text-xl font-bold tracking-tight">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-text-muted text-sm no-underline">Log In</a>
+            <a href="#" class="bg-white text-black px-[18px] py-2 rounded-[20px] font-semibold text-sm no-underline">Join Now</a>
+        </div>
+    </nav>
+
+    <!-- APP CONTAINER -->
+    <div class="grid flex-grow overflow-hidden" style="grid-template-columns: 260px 1fr 320px;">
+
+        <!-- SIDEBAR -->
+        <aside class="p-6 border-r border-border-col flex flex-col h-full overflow-y-auto bg-bg-black">
+            <div class="text-[11px] uppercase text-text-muted tracking-widest mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="index.html" class="nav-item active"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="pageniatedfiles.html" class="nav-item"><i class="fa-solid fa-folder-open"></i> My Files</a>
+            <a href="recent.html" class="nav-item"><i class="fa-solid fa-clock"></i> Recent</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-star"></i> Starred</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-share-nodes"></i> Shared Files</a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-widest mt-6 mb-3 ml-3">Organize</div>
+            <a href="collections.html" class="nav-item"><i class="fa-solid fa-folder"></i> Collections</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-trash"></i> Trash</a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-widest mt-6 mb-3 ml-3">Recently Shared With</div>
+
+            <div class="user-item">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-col text-white">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white whitespace-nowrap overflow-hidden text-ellipsis">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="user-item">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-col text-white">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white whitespace-nowrap overflow-hidden text-ellipsis">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="user-item">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-col text-white">3</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="block text-[13px] font-medium text-white whitespace-nowrap overflow-hidden text-ellipsis">you@innovaturelabs.com</span>
+                </div>
+            </div>
+
+            <div class="mt-3 pt-3 border-t border-border-col flex justify-between items-center text-xs uppercase tracking-[0.5px] text-text-muted cursor-pointer hover:text-white transition-colors">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="overflow-y-auto px-10 py-6">
+            <!-- Search Row -->
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="w-full max-w-[450px] bg-bg-card border border-border-col px-4 py-[10px] rounded-xl flex items-center">
+                    <i class="fa fa-search text-text-muted"></i>
+                    <input type="text" placeholder="Search in 'Project Assets'..." class="bg-transparent border-none text-white ml-3 w-full outline-none text-sm">
+                </div>
+            </div>
+
+            <!-- Page Header -->
+            <div class="flex justify-between items-center mb-[30px]">
+                <div class="flex items-center gap-4">
+                    <i class="fa-solid fa-arrow-left text-text-muted cursor-pointer text-lg hover:text-white transition-colors"></i>
+                    <div class="text-xl font-semibold page-title">Project Assets</div>
+                </div>
+                <div class="text-text-muted text-sm">12 items in collection</div>
+            </div>
+
+            <!-- File Grid -->
+            <div class="grid grid-cols-3 gap-5 mb-10">
+                <a href="singlefile.html" class="file-card">
+                    <div class="file-thumb">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <img src="https://via.placeholder.com/300x140/111/111" alt="preview">
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-sm font-medium mb-2 whitespace-nowrap overflow-hidden text-ellipsis">Final_Pitch_Deck.pdf</span>
+                        <div class="flex justify-between text-xs text-text-muted">
+                            <span>4.2 MB</span>
+                            <span>2h ago</span>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="file-card">
+                    <div class="file-thumb">
+                        <i class="fa-solid fa-file-word"></i>
+                        <img src="https://via.placeholder.com/300x140/111/111" alt="preview">
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-sm font-medium mb-2 whitespace-nowrap overflow-hidden text-ellipsis">Meeting_Notes_Feb.docx</span>
+                        <div class="flex justify-between text-xs text-text-muted">
+                            <span>1.1 MB</span>
+                            <span>Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-card">
+                    <div class="file-thumb">
+                        <i class="fa-solid fa-image"></i>
+                        <img src="https://via.placeholder.com/300x140/111/111" alt="preview">
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-sm font-medium mb-2 whitespace-nowrap overflow-hidden text-ellipsis">Logo_Concept_V1.png</span>
+                        <div class="flex justify-between text-xs text-text-muted">
+                            <span>850 KB</span>
+                            <span>Feb 18, 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="file-card">
+                    <div class="file-thumb">
+                        <i class="fa-solid fa-file-excel"></i>
+                        <img src="https://via.placeholder.com/300x140/111/111" alt="preview">
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-sm font-medium mb-2 whitespace-nowrap overflow-hidden text-ellipsis">Budget_Forecast.xlsx</span>
+                        <div class="flex justify-between text-xs text-text-muted">
+                            <span>2.4 MB</span>
+                            <span>Feb 15, 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center items-center gap-3 py-5">
+                <button class="page-btn active">1</button>
+            </div>
+        </main>
+
+        <!-- RIGHT PANEL -->
+        <aside class="px-5 py-6 border-l border-border-col flex flex-col">
+            <!-- Collection Details Card -->
+            <div class="bg-bg-card border border-border-col rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Collection Details</div>
+                <p class="text-sm text-accent-white mb-2 leading-relaxed card-desc">All the employee details</p>
+                <p class="text-[11px] text-text-muted mb-5 leading-relaxed">Created by you on Feb 01, 2026.</p>
+                <div class="flex justify-between text-[13px] mb-[10px] text-text-muted">
+                    <span>Total Size</span><span class="text-white font-medium">8.7 MB</span>
+                </div>
+                <div class="flex justify-between text-[13px] mb-[10px] text-text-muted">
+                    <span>Files</span><span class="text-white font-medium">12</span>
+                </div>
+                <div class="flex justify-between text-[13px] mb-[10px] text-text-muted">
+                    <span>Visibility</span><span class="text-white font-medium">Private</span>
+                </div>
+            </div>
+
+            <!-- Recent Activity Card -->
+            <div class="bg-bg-card border border-border-col rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Recent Activity</div>
+                <div class="text-xs text-text-muted leading-relaxed">
+                    <p class="my-2">• You uploaded <b>Pitch_Deck.pdf</b></p>
+                    <p class="my-2">• Collection renamed to <b>Project Assets</b></p>
+                </div>
+            </div>
+
+            <div class="mt-auto">
+                <button class="btn-manage" onclick="openModal()">
+                    <i class="fa-solid fa-gear"></i> Manage Collection
+                </button>
+                <button class="btn-delete" onclick="openDeleteModal()">
+                    <i class="fa-solid fa-trash-can"></i> Delete Collection
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- MANAGE MODAL -->
+    <div class="modal-overlay" id="manageModal">
+        <div class="modal-content modal-manage">
+            <div class="flex justify-between items-center text-lg font-semibold mb-5">
+                <span>Manage Collection</span>
+                <i class="fa-solid fa-xmark cursor-pointer text-text-muted" onclick="closeModal()"></i>
+            </div>
+            <div class="form-group mb-4">
+                <label class="block text-[11px] text-text-muted uppercase tracking-[0.5px] mb-2">Collection Name</label>
+                <input type="text" id="folderNameInput" value="Project Assets">
+            </div>
+            <div class="form-group mb-4">
+                <label class="block text-[11px] text-text-muted uppercase tracking-[0.5px] mb-2">Description</label>
+                <textarea id="folderDescInput" rows="3">All the employee details</textarea>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button class="flex-1 bg-white text-black border-none py-3 rounded-lg font-semibold cursor-pointer" onclick="saveFolderDetails()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE MODAL -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-content modal-delete">
+            <div class="flex justify-between items-center text-lg font-semibold mb-5">
+                <span class="text-danger">Delete Collection?</span>
+                <i class="fa-solid fa-xmark cursor-pointer text-text-muted" onclick="closeDeleteModal()"></i>
+            </div>
+            <div class="text-sm text-text-muted leading-relaxed mb-5">
+                This action cannot be undone. The files inside the collection wont be lost.
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button onclick="closeDeleteModal()" class="flex-1 bg-transparent text-white border border-border-col py-3 rounded-lg font-semibold cursor-pointer hover:bg-[#111] transition-colors">Cancel</button>
+                <button onclick="confirmDelete()" class="flex-1 bg-danger text-white border-none py-3 rounded-lg font-semibold cursor-pointer">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const manageModal = document.getElementById('manageModal');
+        const deleteModal = document.getElementById('deleteModal');
+
+        function openModal() { manageModal.style.display = 'flex'; }
+        function closeModal() { manageModal.style.display = 'none'; }
+
+        function openDeleteModal() {
+            const currentName = document.querySelector('.page-title').innerText;
+            deleteModal.style.display = 'flex';
+        }
+        function closeDeleteModal() { deleteModal.style.display = 'none'; }
+
+        window.onclick = function(event) {
+            if (event.target == manageModal) closeModal();
+            if (event.target == deleteModal) closeDeleteModal();
+        }
+
+        function saveFolderDetails() {
+            const newName = document.getElementById('folderNameInput').value;
+            const newDesc = document.getElementById('folderDescInput').value;
+            document.querySelector('.page-title').innerText = newName;
+            document.querySelector('.card-desc').innerText = newDesc;
+            closeModal();
+        }
+
+        function confirmDelete() {
+            alert("Collection has been deleted.");
+            closeDeleteModal();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

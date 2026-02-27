@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiveDrive Drive | Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-black': '#000000',
+                        'bg-card': '#0a0a0a',
+                        'border-color': '#1a1a1a',
+                        'text-muted': '#808080',
+                        'accent-blue': '#3b82f6',
+                        'accent-white': '#e3e3e3',
+                        'danger': '#ff4444',
+                        'success': '#00c851',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            * { -ms-overflow-style: none; scrollbar-width: none; }
+            *::-webkit-scrollbar { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-bg-black text-white font-sans flex flex-col h-screen overflow-hidden m-0">
+
+    <nav class="h-[60px] flex items-center justify-between px-6 border-b border-border-color shrink-0">
+        <div class="text-[20px] font-bold tracking-[-0.5px]">HiveDrive</div>
+        <div class="flex items-center gap-5">
+            <a href="login.html" class="text-text-muted no-underline text-sm">Log In</a>
+            <a href="register.html" class="bg-white text-black px-[18px] py-2 rounded-[20px] no-underline font-semibold text-sm">Join Now</a>
+            
+            <div class="relative flex items-center p-[4px_8px] rounded-lg cursor-pointer transition-colors hover:bg-[#111] border border-transparent" id="profileToggle">
+                <div class="flex items-center gap-[10px]">
+                    <div class="w-8 h-8 bg-accent-blue text-white rounded-full flex items-center justify-center text-[12px] font-semibold shrink-0">JD</div>
+                    <div class="flex flex-col text-left">
+                        <span class="text-[13px] font-medium text-white">John Doe</span>
+                        <span class="text-[10px] text-text-muted">Project Manager</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-[10px] text-text-muted ml-1"></i>
+                </div>
+                
+                <div class="absolute top-[calc(100%+10px)] right-0 w-[180px] bg-bg-card border border-border-color rounded-xl p-2 hidden z-[100] shadow-[0_10px_25px_rgba(0,0,0,0.5)]" id="profileDropdown">
+                    <a href="userprofile.html" class="flex items-center gap-[10px] p-[10px_12px] text-text-muted no-underline text-[13px] rounded-md transition-colors hover:bg-[#1a1a1a] hover:text-white">
+                        <i class="fa-solid fa-user"></i> My Profile
+                    </a>
+                    <hr class="border-0 border-t border-border-color my-2">
+                    <a href="#" class="flex items-center gap-[10px] p-[10px_12px] text-danger no-underline text-[13px] rounded-md transition-colors hover:bg-[#1a1a1a]">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="grid grid-cols-[260px_1fr_320px] flex-grow overflow-hidden">
+        <aside class="p-[24px_16px] border-r border-border-color flex flex-col overflow-y-auto">
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Main Feed</div>
+            <a href="index.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-house w-5 mr-3 text-base"></i> Home
+            </a>
+            <a href="pageniatedfiles.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder-open w-5 mr-3 text-base"></i> My Files
+            </a>
+            <a href="recent.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-clock w-5 mr-3 text-base"></i> Recent
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-star w-5 mr-3 text-base"></i> Starred
+            </a>
+            <a href="#" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-share-nodes w-5 mr-3 text-base"></i> Shared Files
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Organize</div>
+            <a href="collections.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-folder w-5 mr-3 text-base"></i> Collections
+            </a>
+            <a href="trash.html" class="flex items-center p-[10px_12px] rounded-lg text-text-muted no-underline text-sm transition-colors hover:bg-[#111] hover:text-white">
+                <i class="fa-solid fa-trash w-5 mr-3 text-base"></i> Trash
+            </a>
+
+            <div class="text-[11px] uppercase text-text-muted tracking-[1px] mt-6 mb-3 ml-3">Recently Shared With</div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">1</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">abhiram@innovaturelabs.commmmm</span>
+                </div>
+            </div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">2</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">demo@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="flex items-center p-[8px_12px] gap-3 cursor-pointer min-w-0">
+                <div class="w-7 h-7 flex-shrink-0 flex items-center justify-center text-[11px] rounded-full bg-border-color text-white">3</div>
+                <div class="flex-1 min-w-0 overflow-hidden">
+                    <span class="text-[13px] font-medium text-white block max-w-full whitespace-nowrap overflow-hidden text-ellipsis">you@innovaturelabs.com</span>
+                </div>
+            </div>
+            <div class="mt-[10px] flex justify-between items-center p-[10px_12px] text-text-muted text-[12px] uppercase tracking-[0.5px] cursor-pointer border-t border-border-color">
+                <span>View All shares</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </div>
+        </aside>
+
+        <main class="overflow-y-auto p-10 bg-[#060505] m-5 rounded-[10px] border border-border-color">
+            <div class="flex justify-between items-center mb-10">
+                <div class="text-[20px] font-600">Account Profile</div>
+            </div>
+
+            <div class="flex items-center gap-[30px] mb-10 pb-10 border-b border-border-color">
+                <div class="w-[100px] h-[100px] bg-accent-blue rounded-full flex items-center justify-center text-4xl font-bold text-white">JD</div>
+                <div class="flex-grow">
+                    <h2 class="m-0 mb-[5px] text-[28px] font-semibold">John Doe</h2>
+                    <p class="m-0 text-text-muted text-sm">Project Manager • john.doe@innovaturelabs.com</p>
+                </div>
+                <a href="settings.html" class="ml-auto bg-white text-black p-[10px_24px] rounded-[20px] no-underline text-sm font-semibold transition-opacity hover:opacity-90">
+                    Edit Profile
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-[30px]">
+                <div class="p-0 bg-transparent">
+                    <div class="text-[11px] uppercase text-text-muted tracking-[1px] mb-[10px]">First Name</div>
+                    <div class="text-base font-medium text-white">John</div>
+                </div>
+                <div class="p-0 bg-transparent">
+                    <div class="text-[11px] uppercase text-text-muted tracking-[1px] mb-[10px]">Last Name</div>
+                    <div class="text-base font-medium text-white">Doe</div>
+                </div>
+                <div class="p-0 bg-transparent">
+                    <div class="text-[11px] uppercase text-text-muted tracking-[1px] mb-[10px]">Role / Occupation</div>
+                    <div class="text-base font-medium text-white">Project Manager</div>
+                </div>
+                <div class="p-0 bg-transparent">
+                    <div class="text-[11px] uppercase text-text-muted tracking-[1px] mb-[10px]">Total Files Managed</div>
+                    <div class="text-base font-medium text-white">1,248 Files</div>
+                </div>
+                <div class="p-0 bg-transparent">
+                    <div class="text-[11px] uppercase text-text-muted tracking-[1px] mb-[10px]">Date Joined</div>
+                    <div class="text-base font-medium text-white">January 15, 2024</div>
+                </div>
+                <div class="p-0 bg-transparent">
+                    <div class="text-[11px] uppercase text-text-muted tracking-[1px] mb-[10px]">Account Status</div>
+                    <div class="text-base font-medium text-success">Active</div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="p-[24px_20px] border-l border-border-color">
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="text-base font-semibold mb-2">Home</div>
+                <p class="text-[12px] text-text-muted leading-relaxed mb-5">Your personal HiveDrive frontpage. Come here to check in with your most important documents and shared folders.</p>
+                <a href="uploadfile.html" class="block w-auto p-[10px] bg-accent-white text-black rounded-[20px] font-semibold cursor-pointer mb-[10px] no-underline text-center text-sm transition-opacity hover:opacity-90">Upload File</a>
+                <a href="collections.html" class="block w-auto p-[10px] bg-transparent text-white border border-border-color rounded-[20px] font-semibold cursor-pointer no-underline text-center text-sm transition-colors hover:bg-[#111]">View your Collections</a>
+            </div>
+
+            <div class="bg-bg-card border border-border-color rounded-xl p-5 mb-4">
+                <div class="flex items-center gap-[10px] text-danger text-[13px] font-semibold">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>STORAGE CRITICAL</span>
+                </div>
+                <div class="h-1 bg-[#222] rounded-[2px] my-3">
+                    <div class="w-[93%] h-full bg-danger"></div>
+                </div>
+                <p class="text-[12px] text-text-muted m-0">14.08 GB of 15 GB used (93%)</p>
+                <p class="text-[11px] text-accent-blue mt-[10px] cursor-pointer">Upgrade Storage Plan</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const profileToggle = document.getElementById('profileToggle');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        window.addEventListener('click', () => {
+            if (!profileDropdown.classList.contains('hidden')) {
+                profileDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
